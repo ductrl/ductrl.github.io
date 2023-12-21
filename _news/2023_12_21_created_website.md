@@ -2,7 +2,7 @@
 layout: post
 title: Finally created my personal website!
 date: 2023-12-21 17:22:00 +0700
-inline: true
+inline: false # true is for displaying everything
 related_posts: false
 ---
 
