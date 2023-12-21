@@ -102,12 +102,13 @@ zotero_username: # your zotero username
 wechat_qr: # filename of your wechat qr-code saved as an image (e.g., wechat-qr.png if saved to assets/img/wechat-qr.png)
 
 contact_note: >
+  I typically turn off my socials' notification to focus on studying, so email is the best way to contact me.
 
 # -----------------------------------------------------------------------------
 # Analytics and search engine verification
 # -----------------------------------------------------------------------------
 
-google_analytics: # your Google Analytics measurement ID (format: G-XXXXXXXXXX)
+google_analytics: G-LG1E3TTGT8 # your Google Analytics measurement ID (format: G-XXXXXXXXXX)
 cronitor_analytics: # cronitor RUM analytics site ID (format: XXXXXXXXX)
 
 google_site_verification: # your google-site-verification ID (Google Search Console)
@@ -118,7 +119,7 @@ bing_site_verification: # out your bing-site-verification ID (Bing Webmaster)
 # -----------------------------------------------------------------------------
 
 blog_name: my blog # blog_name will be displayed in your blog page
-blog_nav_title: duc's blog # your blog must have a title for it to be displayed in the nav bar
+blog_nav_title: blog # your blog must have a title for it to be displayed in the nav bar
 blog_description: welcome to my corner of the internet! here, i'll document my experience and topics i find to be intriguing.
 permalink: /blog/:year/:title/
 

@@ -2,16 +2,16 @@
 layout: about
 title: about
 permalink: /
-subtitle: Artificial Intelligence | he/him | PTNK 2225 | Drummer
+subtitle: Artificial Intelligence | He/Him | PTNK 2225 | Drummer
 
 profile:
   align: right
   image: prof_pic.jpg
-  image_circular: true # crops the image to make it circular
+  image_circular: false # crops the image to make it circular
   more_info: >
 
-news: false # includes a list of news items
-latest_posts: true # includes a list of the newest posts
+news: true # includes a list of news items
+latest_posts: false # includes a list of the newest posts
 selected_papers: false # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
 ---
@@ -26,4 +26,4 @@ My research interest is the intersections of **Machine Learning** and **Psycholo
 
 I love doodling, playing music (drum and guitar), and playing sports like basketball and badminton. I also picked up blogging as a hobby recently.
 
-I am always excited to connect and engage in discussions related to my interests and beyond. Feel free to reach me at [lytriducgp@gmail.com](mailto:lytriducgp@gmail.com) for any inquiry.
+> **I am always excited to connect and engage in discussions related to my interests and beyond. Feel free to reach me at [lytriducgp@gmail.com](mailto:lytriducgp@gmail.com) for any inquiry.**
