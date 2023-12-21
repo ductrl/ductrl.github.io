@@ -18,7 +18,7 @@ social: true # includes social icons at the bottom of the page
 
 _Good morning, and in case I don’t see ya: Good afternoon, good evening, and goodnight!_ - Truman.
 
-I am a high school student at [High School for the Gifted, VNU-HCM](https://ptnk.edu.vn/), with a strong passion for **Computer Science**, **Psychology** and **Music**.
+I am a high school student at [High School for the Gifted, VNU-HCM](https://ptnk.edu.vn/), with a strong passion for **Computer Science**, **Psychology** and **Music**. My name can be pronounced as "Duke", though I'm also happy to be called as _Mike_ or _Lee_.
 
 My research interest is the intersections of **Machine Learning** and **Psychology**, specifically **Alzheimer's Disease**. I aim to **use my knowledge of Machine Learning to aid elderly people suffering from Alzheimer's disease**. The topic of _applying Machine Learning to Music_ has also caught my interest recently, as well as _Music Therapy_ - a method with great potential that has yet to be utilized in Vietnam.
 
