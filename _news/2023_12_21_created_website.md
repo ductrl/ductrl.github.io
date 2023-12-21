@@ -4,6 +4,7 @@ title: Finally created my personal website!
 date: 2023-12-21 17:22:00 +0700
 inline: false # true is for displaying everything
 related_posts: false
+sitemap: false # news don't need indexing
 ---
 
 Displaying this news as a post format was absolutely unnecessary, but I just wanted to do it so that I can use this one as a guide for future news.
