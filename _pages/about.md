@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: Artificial Intelligence | He/Him | PTNK 2225 | Drummer
+subtitle: Psychology | Computer Science | He/Him | PTNK 2225 | Drummer
 
 profile:
   align: right
@@ -20,7 +20,7 @@ _Good morning, and in case I don’t see ya: Good afternoon, good evening, and g
 
 I am a high school student at [High School for the Gifted, VNU-HCM](https://ptnk.edu.vn/), with a strong passion for **Computer Science**, **Psychology** and **Music**. My name can be pronounced as "Duke", though I'm also happy to be called as _Mike_ or _Lee_.
 
-My research interest is the intersections of **Machine Learning** and **Psychology**, specifically **Alzheimer's Disease**. I aim to **use my knowledge of Machine Learning to aid elderly people suffering from Alzheimer's disease**. The topic of _applying Machine Learning to Music_ has also caught my interest recently, as well as _Music Therapy_ - a method with great potential that has yet to be utilized in Vietnam.
+My research interest is the intersections of **Psychology** (specifically **Alzheimer's Disease**) and **Artificial Intelligence**. I aim to **use my knowledge of Machine Learning to aid elderly people suffering from Alzheimer's disease**. The topic of _applying Machine Learning to Music_ has also caught my interest recently, as well as _Music Therapy_ - a method with great potential that has yet to be utilized in Vietnam.
 
 **Knowing how the things I'm studying and researching can make an impact and improve others' quality of life is important to me, hence why I find it essential to apply my knowledge to many projects, big or small**.
 
