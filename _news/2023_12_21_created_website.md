@@ -26,8 +26,8 @@ I spent hours looking for a template that:
 
 And surprise! _al-folio_ fits those perfectly while also bringing even more awesome features to the table (that I have yet to use). Yeah sure, it sounds like an advertisement, but I have to give credit to where credit is due. If you find my site beautiful, please head to [al-folio](https://github.com/alshedivat/al-folio) and drop them a star!
 
-For a such a dummy like me, setting up this site was a hugeeee struggle, so anyone who is in a similar situation, you can take a look at the video below!
+For such a dummy like me, setting up this site was a hugeeee struggle, so anyone who is in a similar situation, you can take a look at the video below!
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/g6AJ9qPPoyc?si=_VwBHihnr1OSgI6N" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/g6AJ9qPPoyc?si=_VwBHihnr1OSgI6N" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="width: 100%"></iframe>
 
 That's it from me today! I have end-term exams tomorrow, so see you guys later, folks!
