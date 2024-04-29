@@ -24,6 +24,6 @@ My research interest is the intersections of **Psychology** (specifically **Alzh
 
 **Knowing how the things I'm studying and researching can make an impact and improve others' quality of life is important to me, hence why I find it essential to apply my knowledge to many projects, big or small**.
 
-I love doodling, playing music (drum and guitar), and playing sports like basketball and badminton. I find cinematography to be such a magnificant art, though I cannot afford to pursue it as a hobbie, so I just love to observe it when watching movies / videos. I also picked up blogging as a hobby recently. By the way, the quote at the top of the page is just a quote I find fascinating, _The Truman Show_ was such a spectacular movie.
+I love doodling, playing music (drum and guitar), and playing sports like basketball and badminton. I find cinematography to be such a magnificant art, though I cannot afford to pursue it as a hobbie, so I just love to observe it when watching movies / videos. I also picked up blogging as a hobby recently.
 
 > _I am always excited to connect and engage in discussions related to my interests and beyond. Feel free to reach me at [lytriducgp@gmail.com](mailto:lytriducgp@gmail.com) for any inquiry._
