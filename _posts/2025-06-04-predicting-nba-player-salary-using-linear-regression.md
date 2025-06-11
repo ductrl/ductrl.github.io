@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Predicting NBA Player Salary Using Linear Regression
-date: 2025-06-xx 15:00:00
+date: 2025-06-04 15:00:00
 description: Predict NBA salaries from their stats using a linear regression model
 toc:
     sidebar: left
