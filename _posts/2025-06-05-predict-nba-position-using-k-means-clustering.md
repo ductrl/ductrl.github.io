@@ -4,7 +4,7 @@ title: Predict NBA Position Using K-means Clustering
 date: 2025-06-05 15:00:00
 description: Predict NBA position from height and weight using a K-means clustering
 toc:
-	sidebar: left
+    sidebar: left
 tags: machine-learning nba
 categories: machine-learning-projects
 ---
