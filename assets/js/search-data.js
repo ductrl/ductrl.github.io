@@ -44,15 +44,15 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/books/";
           },
-        },{id: "post-",
+        },{id: "post-predict-nba-position-using-k-means-clustering",
         
-          title: "",
+          title: "Predict NBA Position Using K-means Clustering",
         
-        description: "",
+        description: "Predict NBA position from height and weight using a K-means clustering",
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2025/2025-06-05-predict-nba-position-using-k-means-clustering/";
+            window.location.href = "/blog/2025/predict-nba-position-using-k-means-clustering/";
           
         },
       },{id: "post-predicting-nba-player-salary-using-linear-regression",
