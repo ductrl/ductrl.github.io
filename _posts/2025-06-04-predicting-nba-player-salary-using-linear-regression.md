@@ -15,9 +15,13 @@ In this project, we will try to predict an NBA player’s salary just from their
 
 Using various individual performance stats, we will predict an NBA player's salary with a linear regression model.
 
+<br>
+
 # 2. Data Preparation
 
 For this project, we will use data set from Kaggle called [NBA Players & Team Data](https://www.kaggle.com/datasets/loganlauton/nba-players-and-team-data?select=NBA+Player+Stats%281950+-+2022%29.csv), which provides multiple datasets, including one for player individual stats and another one for salaries. Since they are separate datasets, we will clean them individually and then merge them.
+
+<br>
 
 ### Data cleaning
 
@@ -60,6 +64,8 @@ Like many monetary datasets, the salaries are also formatted in strings, e.g., *
 df['salary'] = df['salary'].str.replace('$', '').str.replace(',', '').astype(float)
 df.head()
 ```
+<br>
+
 
 ### Feature engineering
 
@@ -73,6 +79,8 @@ for i in range (5):
   df[average_stats[i]] = df[average_stats[i]].round(2)
 ```
 
+<br>
+
 ### Data splitting
 
 We will simply go with the classic 80% train and 20% test split using `sklearn`’s `train_test_split`.
@@ -80,6 +88,8 @@ We will simply go with the classic 80% train and 20% test split using `sklearn`�
 ```python
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=23)
 ```
+
+<br>
 
 # 3. Modeling
 
