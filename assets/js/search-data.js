@@ -44,7 +44,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/books/";
           },
-        },{id: "post-predicting-nba-player-salary-using-linear-regression",
+        },{id: "post-",
+        
+          title: "",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/2025-06-05-predict-nba-position-using-k-means-clustering/";
+          
+        },
+      },{id: "post-predicting-nba-player-salary-using-linear-regression",
         
           title: "Predicting NBA Player Salary Using Linear Regression",
         
