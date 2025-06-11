@@ -134,3 +134,9 @@ print(f'Giannis Antetokounmpo makes ${giannis_pred[0]:.2f}M')
 ```
 
 After playing around with it, I found that the model works pretty great on role players. Try modifying the input stats or adding new features to see how the predictions change and play around with the model yourself!
+
+<br>
+
+# 4. Final Words
+
+While you're here, this is part 1 of a machine learning project series where I apply every machine learning algorithm I learned to an NBA-related project. If you want to check out more similar projects, look around my blog and stay tune for more!
