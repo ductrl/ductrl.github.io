@@ -13,23 +13,23 @@ In this project, we will try to predict whether an NBA team will make the playof
 
 <br>
 
-# 1. Project Setup
+## 1. Project Setup
 
 Using a logistic regression model, we will predict if an NBA team can make the playoffs based on its stats.
 
 <br>
 
-# 2. Data Collection
+## 2. Data Collection
 
 We will use the already available NBA Statistics [NBA Statistics Repository](https://github.com/Brescou/NBA-dataset-stats-player-team) on GitHub. This repository contains many datasets, all of which are in the `csv` format, so they are all structured data that can be processed using Pandas.
 
 <br>
 
-# 3. Data Preparation
+## 3. Data Preparation
 
 <br>
 
-### i. Exploratory Data Analysis (EDA)
+#### i. Exploratory Data Analysis (EDA)
 
 I only want to use regular-season stats to predict the qualification (well, if you have playoff stats, then it would mean you are already in the playoffs). Since we're looking at simple data that fans can input themselves, `team_stats_traditional_rs.csv` should be a good dataset to use.
 
@@ -46,7 +46,7 @@ Here are some observations that can be made:
 
 <br>
 
-### ii. Data Preprocessing
+#### ii. Data Preprocessing
 
 All the data have different scales, and since none of these stats are capped in a certain range (we would if we included, for example, field goal percentage, which ranges from 0 to 1), we will use standardization rather than normalization.
 
@@ -77,7 +77,7 @@ df.head()
 
 <br>
 
-### iii. Data Splitting
+#### iii. Data Splitting
 
 ```python
 X = df[relevant_cols[:-1]]
@@ -98,7 +98,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 
 <br>
 
-# 4. Modeling
+## 4. Modeling
 
 Ah, the modeling part! Implementing a Logistic Regression model using `sklearn` is quite straightforward. Since we’re working with a relatively small dataset and only need binary classification, I will be using the `liblinear` solver.
 
@@ -111,7 +111,7 @@ model.fit(X_train, y_train)
 
 <br>
 
-# 5. Evaluation
+## 5. Evaluation
 
 Let’s see how our model does!
 
@@ -123,7 +123,7 @@ print(f'Accuracy: {round(accuracy * 100, 2)}%')
 
 And our model has an accuracy of 88.82%. This is much better than I expected. Now feel free to try out the model with your favorite team!
 
-# 6. Final Words
+## 6. Final Words
 
 While you're here, this is part 4 of a machine learning project series where I apply every machine learning algorithm I learned to an NBA-related project. If you want to check out more similar projects, look around my blog and stay tuned for more!
 
