@@ -11,13 +11,13 @@ categories: machine-learning-projects
 
 In this project, we will try to predict an NBA player’s salary just from their regular season stats by using a linear regression model. You can have a look at this project’s [Google Colab notebook](https://colab.research.google.com/drive/1OPzUx9T_YxQ4eBxVRwVIsJiUjN7TDRo8?usp=sharing) for more details. 
 
-# 1. Project Setup
+## 1. Project Setup
 
 Using various individual performance stats, we will predict an NBA player's salary with a linear regression model.
 
 <br>
 
-# 2. Data Preparation
+## 2. Data Preparation
 
 For this project, we will use data set from Kaggle called [NBA Players & Team Data](https://www.kaggle.com/datasets/loganlauton/nba-players-and-team-data?select=NBA+Player+Stats%281950+-+2022%29.csv), which provides multiple datasets, including one for player individual stats and another one for salaries. Since they are separate datasets, we will clean them individually and then merge them.
 
@@ -91,7 +91,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 
 <br>
 
-# 3. Modeling
+## 3. Modeling
 
 Finally, the good part! As advertised, we will use a linear regression model to predict the salary. 
 
@@ -137,6 +137,6 @@ After playing around with it, I found that the model works pretty great on role 
 
 <br>
 
-# 4. Final Words
+## 4. Final Words
 
 While you're here, this is part 1 of a machine learning project series where I apply every machine learning algorithm I learned to an NBA-related project. If you want to check out more similar projects, look around my blog and stay tune for more!

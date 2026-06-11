@@ -13,13 +13,13 @@ In this project,  we will use K-means clustering to *sort of* predict an NBA pla
 
 <br>
 
-# 1. Project Setup
+## 1. Project Setup
 
 Based on NBA players' heights and weights, we will use **K-means clustering** to determine whether players can be grouped into position-based clusters. (k = 3 for guard, forward, center; k = 5 for PG, SG, SF, PF, C).
 
 <br>
 
-# 2. Data Preparation
+## 2. Data Preparation
 
 For this project, we will use the [NBA Player Data (1996-2024)](https://www.kaggle.com/datasets/damirdizdarevic/nba-dataset-eda-and-ml-compatible/data) dataset from Kaggle. This dataset provides the height and weight of individual NBA players (as well as other stats, which we will not use in this project.). As there is no label, an unsupervised learning algorithm such as K-means clustering can come in handy.
 
@@ -67,7 +67,7 @@ Now, using `scaled_df.describe()`, we should see that the scaled data has a mean
 
 <br>
 
-# 3. Modeling
+## 3. Modeling
 
 Implementing a K-means clustering model is quite straightforward. Here, we will use `KMeans` from `sklearn.cluster`.
 
@@ -102,6 +102,6 @@ Based on typical height and weight ranges, we can infer that cluster 0 likely re
 
 <br>
 
-# 4. Final Words
+## 4. Final Words
 
 While you're here, this is part 2 of a machine learning project series where I apply every machine learning algorithm I learned to an NBA-related project. If you want to check out more similar projects, look around my blog and stay tuned for more!

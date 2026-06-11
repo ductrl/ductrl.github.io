@@ -13,13 +13,13 @@ In this project, we will use K-nearest Neighbor (KNN) to predict an NBA playerâ€
 
 <br>
 
-# 1. Project Setup
+## 1. Project Setup
 
 Based on NBA playersâ€™ height and weight, we will predict their position using a KNN model.
 
 <br>
 
-# 2. Data Preparation
+## 2. Data Preparation
 
 For this project, we will use the [NBA Players data (1950 to 2022)](https://www.kaggle.com/datasets/blitzapurv/nba-players-data-1950-to-2021) from Kaggle, which provides player biological data and their respective position. Note that we cannot use the dataset we used last time, as it did not have labels (position).
 
@@ -76,7 +76,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 <br>
 
-# 3. Modeling 
+## 3. Modeling 
 
 In this project, I will implement 2 slightly different models, with the main difference being that one gives more weights to closer neighbors, and see if that improves our accuracy.
 
@@ -131,7 +131,7 @@ model.predict(player)
 
 <br>
 
-# 4. Final Words
+## 4. Final Words
 
 While you're here, this is part 3 of a machine learning project series where I apply every machine learning algorithm I learned to an NBA-related project. If you want to check out more similar projects, look around my blog and stay tuned for more!
 
