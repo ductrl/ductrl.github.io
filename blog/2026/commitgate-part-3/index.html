@@ -1,0 +1,289 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> Building CommitGate - Part 3 | Mike Ly </title> <meta name="author" content="Mike Ly"> <meta name="description" content="Part 3 of building CommitGate - a personal project I’m working on for the Splunk Agentic Ops Hackathon"> <meta name="keywords" content="software-engineering, cybersecurity, uva"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 930px;
+  }
+</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tocbot@4.36.4/dist/tocbot.css" integrity="sha256-zTN0r+0OKaIv2xqeNNIYxNk0pWJ6+IqPGc1iDgVzWF0=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%F0%9F%92%BB&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?v=f0b101217084a90093badfe99ff9a7d1"> <link rel="canonical" href="https://ductrl.github.io/blog/2026/commitgate-part-3/"> <script src="/assets/js/theme.js?v=7af685e2ba20b37fef545c97b8064050"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> Mike Ly </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item active"> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">publications </a> </li> <li class="nav-item "> <a class="nav-link" href="/projects/">projects </a> </li> <li class="nav-item "> <a class="nav-link" href="/repositories/">repositories </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">CV </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="row"> <div class="col-sm-3"> <nav id="toc-sidebar" class="sticky-top toc toc-sidebar" aria-label="Table of contents" data-toc-collapse="expanded" data-toc-collapse-depth=""></nav> </div> <div class="col-sm-9"> <div class="post"> <header class="post-header"> <h1 class="post-title">Building CommitGate - Part 3</h1> <p class="post-meta"> Created on June 08, 2026 </p> <p class="post-tags"> <a href="/blog/2026"> <i class="fa-solid fa-calendar fa-sm"></i> 2026 </a>   ·   <a href="/blog/tag/commitgate"> <i class="fa-solid fa-hashtag fa-sm"></i> commitgate</a>   <a href="/blog/tag/hackathon"> <i class="fa-solid fa-hashtag fa-sm"></i> hackathon</a>   ·   <a href="/blog/category/projects"> <i class="fa-solid fa-tag fa-sm"></i> projects</a> </p> </header> <article class="post-content"> <div id="markdown-content"> <p>Today is the day I’ve been looking forward to, as we’ll finally get started on implementation! Upcoming blogs will be a bit more technical as I talk about our code as we implement CommitGate.</p> <h2 id="1-cli-foundation">1. CLI Foundation</h2> <p>Before implementing any actual functionality, I needed to give users a way to interact with CommitGate. During the planning phase, I quickly decided that CommitGate should be a command-line tool since Git itself is mostly used in CLI. As CommitGate is to be integrated into the Git workflow, CLI felt like a natural choice for me.</p> <p>At least for now, I think users should be able to use these three commands:</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>commitgate scan
+commitgate install-hook
+commitgate version
+</code></pre></div></div> <p>Upon some research on Python libraries to build CLI tools, I - like many - spent hours contemplating between <code class="language-plaintext highlighter-rouge">argparse</code>, <code class="language-plaintext highlighter-rouge">Click</code>, and <code class="language-plaintext highlighter-rouge">Typer</code>. I don’t want to go into too much details about the three, so I will refer those interested to <a href="https://medium.com/@mohd_nass/navigating-the-cli-landscape-in-python-a-comparative-study-of-argparse-click-and-typer-480ebbb7172f" rel="external nofollow noopener" target="_blank">this well-written blog post comparing the three</a>. I ended up going with Typer for its user-friendliness, which works well with CommitGate’s simplicity.</p> <h3 id="typer">Typer</h3> <p>Typer was relatively quick and easy to learn. The <code class="language-plaintext highlighter-rouge">@app.command()</code> decorator registers a function as a CLI command (if a fucntion name has <code class="language-plaintext highlighter-rouge">_</code>, it will convert <code class="language-plaintext highlighter-rouge">_</code> into <code class="language-plaintext highlighter-rouge">-</code> for the command name). This simple example creates the <code class="language-plaintext highlighter-rouge">commitgate version</code> command:</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">typer</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">typer</span><span class="p">.</span><span class="nc">Typer</span><span class="p">()</span>
+
+<span class="nd">@app.command</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">version</span><span class="p">():</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">CommitGate 0.1.0</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div> <p>Typer is also specifically helpful as it automatically generates help menus and argument parsing, thus allowing me to focus more on implementing other functionalities.</p> <h3 id="rich">Rich</h3> <p>If you watch any Youtube tutorial on Typer, you will more than likely see it being used with <code class="language-plaintext highlighter-rouge">Rich</code>, a library for colorful terminal output and formatting. The <code class="language-plaintext highlighter-rouge">print()</code> function is more than enough for my use case. Having that said, saying Rich is powerful is absolutely an understatement, as it provides so many great functionalities that can be very useful for larger CLI tools, which you can further explore from <a href="https://medium.com/@ahmedharabi/get-started-with-the-python-rich-library-2736b1b57941" rel="external nofollow noopener" target="_blank">this blog post on how to get start with Rich</a>.</p> <h3 id="initial-commands">Initial Commands</h3> <p>For now, since we haven’t implemented any functionalities yet, I will just put some placeholders in the commands:</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">typer</span>
+<span class="kn">from</span> <span class="n">rich</span> <span class="kn">import</span> <span class="k">print</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">typer</span><span class="p">.</span><span class="nc">Typer</span><span class="p">()</span>
+
+<span class="nd">@app.command</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">scan</span><span class="p">():</span>
+    <span class="c1"># TODO: Implement
+</span>    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">[green]CommitGate scanned![/green]</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nd">@app.command</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">install_hook</span><span class="p">():</span>
+    <span class="c1"># TODO: Implement
+</span>    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Installing Git hook...</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nd">@app.command</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">version</span><span class="p">():</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">CommitGate 0.1.0</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div> <p>We will work on this as we implement other functionalities.</p> <h2 id="2-git-hook-installation">2. Git Hook Installation</h2> <p>Upon planning the idea of CommitGate, one of its core functionalities that I envisioned was that it needed to automatically run a security check every time the developer uses <code class="language-plaintext highlighter-rouge">git commit</code>. It is vital as the entire reason why I wanted to build CommitGate is that developers, especially inexperienced ones like me, make mistakes. We get lazy and don’t go through our code before committing. We get careless and will forget to run a security scan manually before pushing the code.</p> <p>Thus, we will need to set up a <strong>Git pre-commit hook</strong> for CommitGate. I discovered this concept a few months ago when I accidentally pushed my MongoDB Atlas API key and had to set up a pre-commit hook for Gitleaks.</p> <h3 id="what-is-a-git-hook">What is a Git hook?</h3> <p>A Git hook is simply a script that Git automatically executes every time a specific event triggers it. For example, we can give Git scripts to run every time a commit is created, after a commit is created, before a push, after a merge, and many other points in the workflow. As mentioned above, CommitGate will utilize the pre-commit hook, which (intuitively) executes before Git creates a commit. The flow looks like the chart below:</p> <p><a href="https://postimg.cc/CZXYz2qM" rel="external nofollow noopener" target="_blank"><img src="https://i.postimg.cc/635Q1J6Z/image.png" alt="image.png"></a></p> <p>By running before a commit goes through, CommitGate can detect things like leaked secrets or security vulnerabilities and stop them before they become part of Git history. This helps lessen the hassle as even if the secret is deleted later, malicious actors can still find it in previous commits, thus requiring additional cleanup.</p> <h3 id="implementation">Implementation</h3> <p>Git stores hooks inside the <code class="language-plaintext highlighter-rouge">.git/hooks/</code> directory of a repository. For a pre-commit hook, Git will look for an executable file named <code class="language-plaintext highlighter-rouge">pre-commit</code> and automatically execute it whenever <code class="language-plaintext highlighter-rouge">git commit</code> is run. Because of that, all we need to implement is to have CommitGate create a file at <code class="language-plaintext highlighter-rouge">.git/hooks/pre-commit</code> and write a simple shell script into it:</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#!/bin/sh
+commitgate scan
+</code></pre></div></div> <p>With this, whenever a developer runs <code class="language-plaintext highlighter-rouge">git commit</code>, Git will automatically execute <code class="language-plaintext highlighter-rouge">commitgate scan</code> before the commit is created.</p> <p>This can be easily implemented using Python’s built-in <code class="language-plaintext highlighter-rouge">subprocess</code> module, which allows us to execute external commands and manage external processes. You will also see me using the built-in <code class="language-plaintext highlighter-rouge">pathlib</code> module a lot, as it helps us handle filepaths across different platforms.</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hook_path</span> <span class="o">=</span> <span class="nc">Path</span><span class="p">(</span><span class="sh">"</span><span class="s">.git/hooks/pre-commit</span><span class="sh">"</span><span class="p">)</span>
+    
+<span class="n">subprocess</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span>
+    <span class="sa">f</span><span class="sh">"</span><span class="s">echo </span><span class="sh">'</span><span class="s">#!/bin/sh</span><span class="sh">'</span><span class="s"> &gt; </span><span class="si">{</span><span class="n">hook_path</span><span class="si">}</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">shell</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">check</span><span class="o">=</span><span class="bp">True</span>
+<span class="p">)</span>
+
+<span class="n">subprocess</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span>
+    <span class="sa">f</span><span class="sh">'</span><span class="s">echo </span><span class="se">\'</span><span class="s">commitgate scan</span><span class="se">\'</span><span class="s"> &gt;&gt; </span><span class="si">{</span><span class="n">hook_path</span><span class="si">}</span><span class="sh">'</span><span class="p">,</span>
+    <span class="n">shell</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">check</span><span class="o">=</span><span class="bp">True</span>
+<span class="p">)</span>
+</code></pre></div></div> <p>Using the <code class="language-plaintext highlighter-rouge">run</code> function, the recommended approach to run external shell commands, a subprocess is created and returns a <code class="language-plaintext highlighter-rouge">CompletedProcess</code> object that has the output and exit code when it is finished. <code class="language-plaintext highlighter-rouge">shell=True</code> makes sure that the command is executed through the shell, and <code class="language-plaintext highlighter-rouge">check=True</code> makes it so that a <code class="language-plaintext highlighter-rouge">CalledProcessError</code> will be raised when the process exits with a non-zero exit code.</p> <p>As seen in the code above, the two <code class="language-plaintext highlighter-rouge">subprocess.run</code> function calls write <code class="language-plaintext highlighter-rouge">#!/bin/sh</code> to the <code class="language-plaintext highlighter-rouge">.git/hooks/pre-commit</code> file and then adds <code class="language-plaintext highlighter-rouge">commitgate scan</code> to the end of it.</p> <p>One interesting thing I discovered upon implementing was that Git will silently ignore hook files that don’t have execute permission. As such, even though the hook file is successfully created, the scan is never actually run, which took me a good minute to debug.</p> <p>An easy fix is to add execute permission to the file:</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">subprocess</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span>
+    <span class="sa">f</span><span class="sh">"</span><span class="s">chmod +x </span><span class="si">{</span><span class="n">hook_path</span><span class="si">}</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">shell</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">check</span><span class="o">=</span><span class="bp">True</span>
+<span class="p">)</span>
+</code></pre></div></div> <p>And voila, the install hook function is complete! Only thing left to do is to utilize this function in the <code class="language-plaintext highlighter-rouge">install-hook</code> command:</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@app.command</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">install_hook</span><span class="p">():</span>
+    <span class="n">hook_path</span> <span class="o">=</span> <span class="nf">install_pre_commit_hook</span><span class="p">()</span>
+
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Installed pre-commit hook at </span><span class="si">{</span><span class="n">hook_path</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div> <blockquote class="block-warning"> <h5 id="warning">WARNING</h5> <p>During a later stage of implementation, my teammate and I discovered two bugs about this implementation:</p> <ol> <li>This implementation assumes a Unix-like system (as we use <code class="language-plaintext highlighter-rouge">chmod</code>) and thus would not work on Windows</li> <li>If a user’s git repo already have existing pre-commit hooks, this would completely overwrite it I will revisit this implementation and address these bugs in another blog post.</li> </ol> </blockquote> <h2 id="3-determining-what-to-scan">3. Determining What to Scan</h2> <p>During the planning process, we quickly came to the conclusion that having CommitGate scan the entire repository was too inefficient, especially if we want to have an LLM going through the code. This is especially important as CommitGate is designed to be integrated into the Git workflow and thus should absolutely not create too much friction to it.</p> <p>Because of that, by default, we think it makes the most sense for CommitGate to only focus on the changes about to be committed.</p> <h3 id="the-staging-area">The Staging Area</h3> <p>The staging area is the most useful place for us to find such changes, it is the last place before these codes really get committed. When a developer runs <code class="language-plaintext highlighter-rouge">git add file.py</code>, Git puts the changes into the <strong>staging area</strong>, and by using this, we can get the staged files and code differences.</p> <h3 id="staged-files-retrieval">Staged Files Retrieval</h3> <p>We can get a list of stage files by using:</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git diff --cached --name-only
+</code></pre></div></div> <p>The <code class="language-plaintext highlighter-rouge">--cached</code> option tells Git to compare the staged changes to the last commit. Without it, Git would show the changes that hasn’t been staged yet. The <code class="language-plaintext highlighter-rouge">--name-only</code> flag tells Git to only output the filenames.</p> <p>Using this, we can implement the <code class="language-plaintext highlighter-rouge">get_staged_files</code> function:</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">get_staged_files</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+
+    <span class="n">res</span> <span class="o">=</span> <span class="n">subprocess</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">git</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">diff</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">--cached</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">--name-only</span><span class="sh">"</span><span class="p">],</span>
+        <span class="n">capture_output</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+        <span class="n">text</span><span class="o">=</span><span class="bp">True</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">res</span><span class="p">.</span><span class="n">stdout</span><span class="p">.</span><span class="nf">split</span><span class="p">()</span>
+</code></pre></div></div> <h3 id="staged-diff-retrieval">Staged Diff Retrieval</h3> <p>Knowing which files changed is useful, but obviously we will also need to get the code diff for CommitGate to scan. Similar to the previous function, we can get the staged diff using:</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git diff --cached
+</code></pre></div></div> <p>And we can implement <code class="language-plaintext highlighter-rouge">get_staged_diff</code> like this:</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">get_staged_diff</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">subprocess</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span>
+        <span class="p">[</span><span class="sh">"</span><span class="s">git</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">diff</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">--cached</span><span class="sh">"</span><span class="p">],</span>
+        <span class="n">capture_output</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+        <span class="n">text</span><span class="o">=</span><span class="bp">True</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">res</span><span class="p">.</span><span class="n">stdout</span>
+</code></pre></div></div> <p>It is important that we get these two functions going, as they help CommitGate avoid unnecessary work and reduce AI costs.</p> <h2 id="conclusion">Conclusion</h2> <p>That wraps it up for today! The next blog post will be dedicated to Gitleaks integration, as there is a little more code for that compared to what we’re doing today. The functions and foundations we built today will definitely come in handy for later stages of the project. After the Gitleaks integration, we will be able to actually use CommitGate to scan our commits and start using it as we intended, so I’m definitely looking forward to it!</p> </div> </article> <br> <hr> <br> <h2 class="text-3xl font-semibold mb-4 mt-12">Enjoy Reading This Article?</h2> <p class="mb-2">Here are some more articles you might like to read next:</p> <ul class="list-disc pl-7 my-3 space-y-2 marker:text-[var(--global-theme-color)]"> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/commitgate-part-2/">Building CommitGate - Part 2</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/commigate-part-1/">Building CommitGate - Part 1</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/nba-playoff-qualification-prediction-using-logistic-regression/">NBA Playoff Qualification Prediction Using Logistic Regression</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/predicting-nba-player-salary-using-linear-regression/">Predicting NBA Player Salary Using Linear Regression</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/predict-nba-position-using-k-nearest-neighbor/">Predict NBA Position Using K-nearest Neighbor</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/predict-nba-position-using-k-means-clustering/">Predict NBA Position Using K-means Clustering</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="https://medium.com/@mikelyy/the-most-underrated-human-ability-9ce1517446fa?source=rss-fc1df62d18b9------2" target="_blank" rel="noopener noreferrer">The most underrated human ability</a> <svg width="1rem" height="1rem" viewbox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"> <path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path> </svg> </li> </ul> </div> </div> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Mike Ly. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="external nofollow noopener">GitHub Pages</a>. Last updated: June 12, 2026. </div> </footer> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script defer src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6" crossorigin="anonymous"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script defer src="https://cdn.jsdelivr.net/npm/tocbot@4.36.4/dist/tocbot.min.js" integrity="sha256-lo/r+jQ81wWrxdIiiiEEd538z4+dTJTt+leOuAS7GCw=" crossorigin="anonymous"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script defer src="/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/al_search/js/search-setup.js"></script> <script>
+// get the ninja-keys element
+const ninja = document.querySelector('ninja-keys');
+
+// add the home and posts menu items
+ninja.data = [{
+    id: "nav-about",
+    title: "about",
+    section: "Navigation",
+    handler: () => {
+      window.location.href = "/";
+    },
+  },{id: "nav-blog",
+          title: "blog",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/blog/";
+          },
+        },{id: "nav-publications",
+          title: "publications",
+          description: "publications by categories in reversed chronological order. generated by jekyll-scholar.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/publications/";
+          },
+        },{id: "nav-projects",
+          title: "projects",
+          description: "A collection of my projects. Hopefully it will grow bigger as time goes on.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/projects/";
+          },
+        },{id: "nav-repositories",
+          title: "repositories",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/repositories/";
+          },
+        },{id: "nav-cv",
+          title: "CV",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/cv/";
+          },
+        },{id: "post-building-commitgate-part-3",
+        
+          title: "Building CommitGate - Part 3",
+        
+        description: "Part 3 of building CommitGate - a personal project I’m working on for the Splunk Agentic Ops Hackathon",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/commitgate-part-3/";
+          
+        },
+      },{id: "post-building-commitgate-part-2",
+        
+          title: "Building CommitGate - Part 2",
+        
+        description: "Part 2 of building CommitGate - a personal project I’m working on for the Splunk Agentic Ops Hackathon",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/commitgate-part-2/";
+          
+        },
+      },{id: "post-building-commitgate-part-1",
+        
+          title: "Building CommitGate - Part 1",
+        
+        description: "Part 1 of building CommitGate - a personal project I’m working on for the Splunk Agentic Ops Hackathon",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/commigate-part-1/";
+          
+        },
+      },{id: "post-nba-playoff-qualification-prediction-using-logistic-regression",
+        
+          title: "NBA Playoff Qualification Prediction Using Logistic Regression",
+        
+        description: "Predict whether an NBA team will make the playoffs or not using a logistic regression model",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/nba-playoff-qualification-prediction-using-logistic-regression/";
+          
+        },
+      },{id: "post-predict-nba-position-using-k-nearest-neighbor",
+        
+          title: "Predict NBA Position Using K-nearest Neighbor",
+        
+        description: "Predict NBA position from height and weight using a K-nearest neighbor",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/predict-nba-position-using-k-nearest-neighbor/";
+          
+        },
+      },{id: "post-predict-nba-position-using-k-means-clustering",
+        
+          title: "Predict NBA Position Using K-means Clustering",
+        
+        description: "Predict NBA position from height and weight using a K-means clustering",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/predict-nba-position-using-k-means-clustering/";
+          
+        },
+      },{id: "post-predicting-nba-player-salary-using-linear-regression",
+        
+          title: "Predicting NBA Player Salary Using Linear Regression",
+        
+        description: "Predict NBA salaries from their stats using a linear regression model",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/predicting-nba-player-salary-using-linear-regression/";
+          
+        },
+      },{id: "post-the-most-underrated-human-ability",
+        
+          title: 'The most underrated human ability <svg width="1.2rem" height="1.2rem" top=".5rem" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.open("https://medium.com/@mikelyy/the-most-underrated-human-ability-9ce1517446fa?source=rss-fc1df62d18b9------2", "_blank");
+          
+        },
+      },{id: "books-the-godfather",
+          title: 'The Godfather',
+          description: "",
+          section: "Books",handler: () => {
+              window.location.href = "/books/the_godfather/";
+            },},{id: "news-finished-my-first-year-at-uva",
+          title: 'Finished my first year at UVA!',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/2026-05-29-uva-first-year/";
+            },},{id: "teachings-data-science-fundamentals",
+          title: 'Data Science Fundamentals',
+          description: "This course covers the foundational aspects of data science, including data collection, cleaning, analysis, and visualization. Students will learn practical skills for working with real-world datasets.",
+          section: "Teachings",handler: () => {
+              window.location.href = "/teachings/data-science-fundamentals/";
+            },},{id: "teachings-introduction-to-machine-learning",
+          title: 'Introduction to Machine Learning',
+          description: "This course provides an introduction to machine learning concepts, algorithms, and applications. Students will learn about supervised and unsupervised learning, model evaluation, and practical implementations.",
+          section: "Teachings",handler: () => {
+              window.location.href = "/teachings/introduction-to-machine-learning/";
+            },},{
+        id: 'social-email',
+        title: 'email',
+        section: 'Socials',
+        handler: () => {
+          window.open("mailto:%6C%79%74%72%69%64%75%63.%77%6F%72%6B@%67%6D%61%69%6C.%63%6F%6D", "_blank");
+        },
+      },{
+        id: 'social-github',
+        title: 'GitHub',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://github.com/ductrl", "_blank");
+        },
+      },{
+        id: 'social-linkedin',
+        title: 'LinkedIn',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://www.linkedin.com/in/ly-tri-duc", "_blank");
+        },
+      },{
+      id: 'light-theme',
+      title: 'Change theme to light',
+      description: 'Change the theme of the site to Light',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("light");
+      },
+    },
+    {
+      id: 'dark-theme',
+      title: 'Change theme to dark',
+      description: 'Change the theme of the site to Dark',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("dark");
+      },
+    },
+    {
+      id: 'system-theme',
+      title: 'Use system default theme',
+      description: 'Change the theme of the site to System Default',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("system");
+      },
+    },];
+
+</script> <script src="/assets/al_search/js/shortcut-key.js"></script> </body> </html>
