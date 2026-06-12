@@ -5,7 +5,7 @@ date: 2026-06-06
 description: Part 1 of building CommitGate - a personal project I’m working on for the Splunk Agentic Ops Hackathon
 toc:
     sidebar: left
-tags: commitgate
+tags: commitgate hackathon
 categories: projects
 ---
 

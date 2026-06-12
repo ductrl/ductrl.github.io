@@ -6,7 +6,7 @@ description: Predict NBA position from height and weight using a K-nearest neigh
 toc:
     sidebar: left
 tags: machine-learning nba
-categories: machine-learning-projects
+categories: projects
 ---
 
 In this project, we will use K-nearest Neighbor (KNN) to predict an NBA player’s position using their height and weight. A key difference from a similar project I did previously using K-means clustering is that, unlike K-means, KNN is a supervised learning algorithm. Thus, this time, our data will have labels rather than having to infer the result, like the last time. For more details and code, check out the [Google Colab notebook](https://colab.research.google.com/drive/13-itv_icjHxi0bd-QhIonL55Rwno2ZpA?usp=sharing) of this project to learn more.

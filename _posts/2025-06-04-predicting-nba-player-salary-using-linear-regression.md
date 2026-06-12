@@ -6,7 +6,7 @@ description: Predict NBA salaries from their stats using a linear regression mod
 toc:
     sidebar: left
 tags: machine-learning nba
-categories: machine-learning-projects
+categories: projects
 ---
 
 In this project, we will try to predict an NBA player’s salary just from their regular season stats by using a linear regression model. You can have a look at this project’s [Google Colab notebook](https://colab.research.google.com/drive/1OPzUx9T_YxQ4eBxVRwVIsJiUjN7TDRo8?usp=sharing) for more details. 

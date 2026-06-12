@@ -6,7 +6,7 @@ description: Predict whether an NBA team will make the playoffs or not using a l
 toc:
   sidebar: left
 tags: machine-learning nba
-categories: machine-learning-projects
+categories: projects
 ---
 
 In this project, we will try to predict whether an NBA team will make the playoffs or not based on the team's stats. I intend the use case to be for a fan to input their team's stats in the middle of the season to predict whether they are going to make the playoffs or not. Thus, rather than selecting 16 teams to make the playoffs each season, I believe it makes more sense to treat each team's stats individually and predict solely based on those stats, as fans cannot input all 30 teams' stats. We will use Logistic Regression to predict, so if one wants to see which 16 teams are going to make the NBA playoffs in a certain season, they can select the 8 teams with the highest predicted probability in each conference. For more details and code, check out the [Google Colab notebook](https://colab.research.google.com/drive/1dL6zs01zy1hVEAotqQkb0l-rLnVGzfct?usp=sharing) of this project to learn more.

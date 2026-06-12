@@ -6,7 +6,7 @@ description: Predict NBA position from height and weight using a K-means cluster
 toc:
     sidebar: left
 tags: machine-learning nba
-categories: machine-learning-projects
+categories: projects
 ---
 
 In this project,  we will use K-means clustering to *sort of* predict an NBA player’s position based on their height and weight. For more detailed descriptions and codes, check out the [Google Colab notebook](https://colab.research.google.com/drive/1CCqjMUi7J4fvKlMkVkInOEJ0ZqlXIgVt?usp=sharing) of this project to learn more.
