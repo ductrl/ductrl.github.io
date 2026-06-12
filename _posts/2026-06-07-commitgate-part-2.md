@@ -45,7 +45,11 @@ Although it’s just 2 people and I can go through the Git development workflow 
 
 I believe the most important thing for my teammate and I to have a consensus on is to understand the key workflow and the components of the tool. As such, I am also creating an `architecture.md` file in the `docs/` directory listing the different modules and describing them. For now, the file looks like this:
 
-![image.png](https://i.postimg.cc/DZNtZxw3/image.png)
+<div class="row">
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.liquid loading="eager" path="https://i.postimg.cc/DZNtZxw3/image.png" title="example image" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>
 
 It is helpful to plan out the architecture, since it helped me realize that the project naturally breaks into different components that can be worked on independently. Thus, this allows my teammates and I to allocate work between ourselves based on our strengths. For example, since my teammate specializes in AI Engineering, he will be working on the AI reviewer module while I, with more experience in cybersecurity and understanding more about git hooks, will be implementing things like Gitleaks integration and Git hooks installation.
 

@@ -82,7 +82,11 @@ Thus, we will need to set up a **Git pre-commit hook** for CommitGate. I discove
 
 A Git hook is simply a script that Git automatically executes every time a specific event triggers it. For example, we can give Git scripts to run every time a commit is created, after a commit is created, before a push, after a merge, and many other points in the workflow. As mentioned above, CommitGate will utilize the pre-commit hook, which (intuitively) executes before Git creates a commit. The flow looks like the chart below:
 
-[![image.png](https://i.postimg.cc/635Q1J6Z/image.png)](https://postimg.cc/CZXYz2qM)
+<div class="row">
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.liquid loading="eager" path="https://i.postimg.cc/635Q1J6Z/image.png" title="example image" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>
 
 By running before a commit goes through, CommitGate can detect things like leaked secrets or security vulnerabilities and stop them before they become part of Git history. This helps lessen the hassle as even if the secret is deleted later, malicious actors can still find it in previous commits, thus requiring additional cleanup.
 
