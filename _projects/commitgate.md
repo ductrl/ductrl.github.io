@@ -27,10 +27,10 @@ related_publications: false
 * [Blog series on CommitGate development](https://ductrl.github.io/blog/tag/commitgate/)
 * [Demo video](https://youtu.be/ZYe5vWFRTus?si=kVy7t30MgZUi-6p0)
 
----
 <br>
 
-## Overview
+## Overview  
+---
 
 CommitGate is an AI-powered Git pre-commit security gate that scans staged changes before a commit is created. The tool combines deterministic secret detection with AI-based semantic review to catch both known patterns and contextual vulnerabilities. 
 
