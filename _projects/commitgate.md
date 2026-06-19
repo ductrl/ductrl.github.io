@@ -5,6 +5,7 @@ description: An AI-powered Git pre-commit security gate
 img: assets/gif/commitgate-demo.gif
 importance: 1
 category: personal
+giscus_comments: true
 related_publications: false
 ---
 

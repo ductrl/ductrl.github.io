@@ -6,6 +6,7 @@ description: Predict NBA position from height and weight using a K-nearest neigh
 toc:
     sidebar: left
 tags: machine-learning nba
+giscus_comments: true
 categories: projects
 ---
 

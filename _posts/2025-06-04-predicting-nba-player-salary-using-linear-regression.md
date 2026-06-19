@@ -6,6 +6,7 @@ description: Predict NBA salaries from their stats using a linear regression mod
 toc:
     sidebar: left
 tags: machine-learning nba
+giscus_comments: true
 categories: projects
 ---
 

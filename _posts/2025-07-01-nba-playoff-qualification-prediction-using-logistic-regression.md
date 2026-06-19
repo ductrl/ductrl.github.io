@@ -6,6 +6,7 @@ description: Predict whether an NBA team will make the playoffs or not using a l
 toc:
   sidebar: left
 tags: machine-learning nba
+giscus_comments: true
 categories: projects
 ---
 
