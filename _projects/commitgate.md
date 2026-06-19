@@ -2,7 +2,7 @@
 layout: page
 title: CommitGate
 description: An AI-powered Git pre-commit security gate
-img: assets/gif/demo.gif
+img: assets/gif/commitgate-demo.gif
 importance: 1
 category: personal
 related_publications: false
@@ -10,7 +10,7 @@ related_publications: false
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="/assets/gif/demo.gif" class="img-fluid rounded z-depth-1" zoomable=true %}
+        {% include figure.liquid loading="eager" path="/assets/gif/commitgate-demo.gif" class="img-fluid rounded z-depth-1" zoomable=true %}
     </div>
 </div>
 
