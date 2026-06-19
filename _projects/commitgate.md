@@ -2,7 +2,7 @@
 layout: page
 title: CommitGate
 description: An AI-powered Git pre-commit security gate
-img: 
+img: assets/gif/commitgate-demo.gif
 importance: 1
 category: personal
 related_publications: false
