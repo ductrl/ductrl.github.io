@@ -14,12 +14,16 @@ related_publications: false
     </div>
 </div>
 
+<br>
+
 ## Links
 
 * [GitHub repo](https://github.com/ductrl/CommitGate)
 * [Devpost project page](https://devpost.com/software/commitgate)
 * [Blog series on CommitGate development](https://ductrl.github.io/blog/tag/commitgate/)
 * [Demo video](https://youtu.be/ZYe5vWFRTus?si=kVy7t30MgZUi-6p0)
+
+<br>
 
 ---
 
@@ -34,6 +38,8 @@ The tool integrates directly into the existing Git workflow by installing a pre-
 > CommitGate is intended to be the first layer of DevSecOps, and is not supposed to be a comprehensive code scanner tool.
 {: .block-warning }
 
+<br>
+
 ---
 
 ## The Problem
@@ -41,6 +47,8 @@ The tool integrates directly into the existing Git workflow by installing a pre-
 Most security tools come in too late in the development lifecycle, as developers usually rely on PR reviews, CI/CD security scans, GitHub Push Protection, manual code review, etc. While effective, they only occur after code has already been committed, sometimes even pushed.
 
 I myself experienced this firsthand after I naively committed a MongoDB Atlas API key to GitHub. I was confused as GitHub and Atlas immediately detected the leak and warned me about it via email, yet there was no automatic prevention or block mechanism for it. Rotating credentials quickly fixed the issue, but I could not help but notice that such security checks were happening after the mistake rather than before.
+
+<br>
 
 ---
 
@@ -57,6 +65,8 @@ We designed the flow so that when the user runs `git commit`:
 1. Findings are combined and evaluated by a decision engine
 1. A decision engine compares the findings severity to a configurable policy and decide whether the commit is allowed, warned, or blocked
 1. (Optional) Audit events are sent to Splunk and can be visually viewed on a dashboard
+
+<br>
 
 ---
 
@@ -85,6 +95,8 @@ An AI reviewer will be used to analyze code to detect contextual vulnerabilities
 #### Configurable Policies
 
 The user can configure block severity thresholds, AI provider, and reporting options. We are currently working to expand these options.
+
+<br>
 
 ---
 
@@ -128,6 +140,8 @@ Another problem we faced was building a reliable AI reviewer. LLMs can produce i
 
 Integrating CommitGate with Splunk also presented a learning curve. We had to understand how to send structured events through the HTTP Event Collector (HEC), design a schema for security findings, and ensure that telemetry collection remained non-blocking so that developers could continue committing code even if Splunk was temporarily unavailable.
 
+<br>
+
 ---
 
 ## What We Learned
@@ -142,6 +156,8 @@ This was my first personal project. Building CommitGate has provided valuable ex
 
 I will discuss my lessons learned in an upcoming detailed blog post and will link it here.
 
+<br>
+
 ---
 
 ## Future Work
@@ -151,6 +167,8 @@ Here are some improvements that we are working on (I will constantly update this
 * Local LLM support
 * More configuration options
 * Improve scan time
+
+<br>
 
 ---
 
@@ -176,6 +194,8 @@ As for my part, I was the project lead and was responsible for:
 * CLI development
 * Documentation
 * Demo and submission
+
+<br>
 
 ---
 
