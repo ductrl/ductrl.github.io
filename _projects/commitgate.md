@@ -15,7 +15,7 @@ related_publications: true
 * [Blog series on CommitGate development](https://ductrl.github.io/blog/tag/commitgate/)
 * [Demo video](https://youtu.be/ZYe5vWFRTus?si=kVy7t30MgZUi-6p0)
 
-![CommitGate demo](assets/gif/demo.gif)
+![CommitGate demo](/assets/gif/demo.gif)
 
 ## Overview
 
@@ -67,8 +67,6 @@ An AI reviewer will be used to analyze code to detect contextual vulnerabilities
 The user can configure block severity thresholds, AI provider, and reporting options. We are currently working to expand these options.
 
 ## Architecture 
-
-![CommitGate architecture diagram](https://postimg.cc/tYywMG5Q)
 
 <div class="row mt-3">
     <div class="col-sm mt-3 mt-md-0">
