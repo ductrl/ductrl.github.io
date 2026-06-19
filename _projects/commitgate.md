@@ -5,7 +5,7 @@ description: An AI-powered Git pre-commit security gate
 img: assets/gif/demo.gif
 importance: 1
 category: personal
-related_publications: true
+related_publications: false
 ---
 
 ## Links
@@ -15,7 +15,13 @@ related_publications: true
 * [Blog series on CommitGate development](https://ductrl.github.io/blog/tag/commitgate/)
 * [Demo video](https://youtu.be/ZYe5vWFRTus?si=kVy7t30MgZUi-6p0)
 
-![CommitGate demo](/assets/gif/demo.gif)
+<!-- ![CommitGate demo](/assets/gif/demo.gif) -->
+
+<div class="row">
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.liquid loading="eager" path="/assets/gif/demo.gif" class="img-fluid rounded z-depth-1" zoomable=true %}
+    </div>
+</div>
 
 ## Overview
 
