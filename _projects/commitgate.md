@@ -68,9 +68,9 @@ The user can configure block severity thresholds, AI provider, and reporting opt
 
 ## Architecture 
 
-<div class="row mt-3">
+<div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="https://postimg.cc/tYywMG5Q" class="img-fluid rounded z-depth-1" zoomable=true %}
+        {% include figure.liquid loading="eager" path="https://i.postimg.cc/m2F4hb1D/Commit-Gate-architecture-diagram.png" class="img-fluid rounded z-depth-1" zoomable=true %}
     </div>
 </div>
 
