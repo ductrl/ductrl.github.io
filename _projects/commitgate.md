@@ -13,6 +13,9 @@ related_publications: false
         {% include figure.liquid loading="eager" path="/assets/gif/commitgate-demo.gif" class="img-fluid rounded z-depth-1" zoomable=true %}
     </div>
 </div>
+<div class="caption">
+    CommitGate blocking a vulnerable commit containing hardcoded API keys and command injections.
+</div>
 
 ---
 <br>
@@ -61,7 +64,7 @@ We designed the flow so that when the user runs `git commit`:
 1. Gitleaks searches for known secret patterns
 1. An AI reviewer searches for contextual vulnerabilities
 1. Findings are combined and evaluated by a decision engine
-1. A decision engine compares the findings severity to a configurable policy and decide whether the commit is allowed, warned, or blocked
+1. Decision engine compares the finding severities against a configurable policy and decides whether the commit is allowed, warned, or blocked
 1. (Optional) Audit events are sent to Splunk and can be visually viewed on a dashboard
 
 ---
@@ -106,11 +109,11 @@ The user can configure block severity thresholds, AI provider, and reporting opt
 
 Components:
 
-* **Git pre-commit hook**: Intercepts commit and run the scan
-* **Staged Changes Retriever**: Extract only the staged changes, avoid scanning the whole repo for efficiency
+* **Git pre-commit hook**: Intercepts commit and runs the scan
+* **Staged Changes Retriever**: Extracts only the staged changes, avoid scanning the whole repo for efficiency
 * **Gitleaks Runner**: Performs deterministic secret detection
 * **AI Reviewer**: Uses an OpenAI-compatible model to evaluate contextual security vulnerabilities
-* **Decision Engine**: Merge findings and determines final action for the commit
+* **Decision Engine**: Merges findings and determines final action for the commit
 * **Report Generator**: Formats findings using Rich to produce a readable security report to the terminal
 * **Splunk Logger**: Exports audit events for monitoring and analysis
 
