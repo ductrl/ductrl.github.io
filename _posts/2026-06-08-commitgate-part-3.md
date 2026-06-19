@@ -6,6 +6,7 @@ description: Part 3 of building CommitGate - a personal project I’m working on
 toc:
     sidebar: left
 tags: commitgate hackathon
+giscus_comments: true
 categories: projects
 ---
 
