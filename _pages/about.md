@@ -28,3 +28,5 @@ latest_posts:
 I'm a Vietnamese student pursuing a Bachelor's degree in Computer Science at the University of Virginia. My interests include Software Engineering and Cybersecurity, and I enjoy applying what I learned to personal projects.
 
 In my free time, I'm also a music enthusiast and play the drums. I'm also a big fan of basketball, badminton and college football. Feel free to reach out if you'd like to chat about anything from computer science to sports or music. Go Hoos 🧡💙!
+
+Checkout **projects that I'm working on**: [CommitGate](https://ductrl.github.io/projects/commitgate/)
