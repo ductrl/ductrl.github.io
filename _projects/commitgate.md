@@ -166,7 +166,8 @@ I will discuss my lessons learned in an upcoming detailed blog post and will lin
 
 Here are some improvements that we are working on (I will constantly update this section as more features/fixes come to mind):
 
-* Local LLM support
+* AI CLI subscriptions support (Codex, Claude, Antigravity, etc.)
+* Pre-push hook option (instead of pre-commit)
 * More configuration options
 * Improve scan time
 
