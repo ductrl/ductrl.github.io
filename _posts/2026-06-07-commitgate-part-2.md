@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Building CommitGate - Part 2
+title: "Building CommitGate - Part 2: Workflow & Repository Setup"
 date: 2026-06-07
 description: Part 2 of building CommitGate - a personal project I’m working on for the Splunk Agentic Ops Hackathon
 toc:
