@@ -208,5 +208,6 @@ Read the full build log (More coming in the future):
 
 * [Building CommitGate - Part 1](https://ductrl.github.io/blog/2026/commigate-part-1/): Planning & Architecture
 * [Building CommitGate - Part 2](https://ductrl.github.io/blog/2026/commitgate-part-2/): Workflow & Repository Setup
-* [Building CommitGate - Part 3](https://ductrl.github.io/blog/2026/commitgate-part-3/): Git Hooks & Gitleaks Integration
+* [Building CommitGate - Part 3](https://ductrl.github.io/blog/2026/commitgate-part-3/): Git Hooks Installation
+* [Building CommitGate - Part 4](): Gitleaks Integration & Git Hook Install Fix
 

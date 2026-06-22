@@ -247,7 +247,7 @@ def run_gitleaks_scan() -> list[dict]:
 
 <br>
 
-## Git Hook Installation Bug Fix
+## 2. Git Hook Installation Bug Fix
 ---
 
 Like I mentioned in part 3, we discovered two crucial bugs that need to be fixed:
