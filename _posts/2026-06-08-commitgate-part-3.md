@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Building CommitGate - Part 3: Git Hooks & Gitleaks Integration"
+title: "Building CommitGate - Part 3: Git Hooks Installation"
 date: 2026-06-08
 description: Part 3 of building CommitGate - a personal project I’m working on for the Splunk Agentic Ops Hackathon
 toc:
