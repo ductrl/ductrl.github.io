@@ -1,0 +1,429 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> Building CommitGate - Part 5: CLI Integration | Mike Ly </title> <meta name="author" content="Mike Ly"> <meta name="description" content="Part 5 of building CommitGate - a personal project I’m working on for the Splunk Agentic Ops Hackathon"> <meta name="keywords" content="software-engineering, cybersecurity, uva"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 930px;
+  }
+</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tocbot@4.36.4/dist/tocbot.css" integrity="sha256-zTN0r+0OKaIv2xqeNNIYxNk0pWJ6+IqPGc1iDgVzWF0=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%F0%9F%92%BB&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?v=f0b101217084a90093badfe99ff9a7d1"> <link rel="canonical" href="https://ductrl.github.io/blog/2026/commitgate-part-5/"> <script src="/assets/js/theme.js?v=7af685e2ba20b37fef545c97b8064050"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> Mike Ly </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item active"> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">publications </a> </li> <li class="nav-item "> <a class="nav-link" href="/projects/">projects </a> </li> <li class="nav-item "> <a class="nav-link" href="/repositories/">repositories </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">CV </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="row"> <div class="col-sm-3"> <nav id="toc-sidebar" class="sticky-top toc toc-sidebar" aria-label="Table of contents" data-toc-collapse="expanded" data-toc-collapse-depth=""></nav> </div> <div class="col-sm-9"> <div class="post"> <header class="post-header"> <h1 class="post-title">Building CommitGate - Part 5: CLI Integration</h1> <p class="post-meta"> Created on July 10, 2026 </p> <p class="post-tags"> <a href="/blog/2026"> <i class="fa-solid fa-calendar fa-sm"></i> 2026 </a>   ·   <a href="/blog/tag/commitgate"> <i class="fa-solid fa-hashtag fa-sm"></i> commitgate</a>   <a href="/blog/tag/hackathon"> <i class="fa-solid fa-hashtag fa-sm"></i> hackathon</a>   ·   <a href="/blog/category/projects"> <i class="fa-solid fa-tag fa-sm"></i> projects</a> </p> </header> <article class="post-content"> <div id="markdown-content"> <p>Welcome back to part 5 of building CommitGate! It has been a while, as unfortunately I have not been able to allocate the appropriate time to continue these blog posts while working on my other personal projects and hackathons. Because of that, I plan to end this dev journey blog series within the next few blog posts. My teammate and I have been continuously working on this project even after the hackathon (from which we should hear back about the results in one week). In the upcoming blog posts I want to briefly talk about what we have changed and some of the thinking behind them.</p> <p><br></p> <h2 id="1-cli">1. CLI</h2> <hr> <p>We have made a lot of changes to the CLI. Let’s take a look at some of the changes.</p> <p>First, let’s look at how the security scan is run:</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">gitleaks_findings</span> <span class="o">=</span> <span class="nf">run_gitleaks_scan</span><span class="p">(</span><span class="n">file_paths</span><span class="o">=</span><span class="n">file_paths</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">ai_enabled</span><span class="p">:</span>
+    <span class="n">ai_findings</span><span class="p">,</span> <span class="n">ai_review_ok</span> <span class="o">=</span> <span class="nf">review</span><span class="p">(</span><span class="n">diff</span><span class="o">=</span><span class="n">diff</span><span class="p">,</span> <span class="n">staged_files</span><span class="o">=</span><span class="n">file_paths</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">ai_findings</span><span class="p">,</span> <span class="n">ai_review_ok</span> <span class="o">=</span> <span class="p">[],</span> <span class="bp">True</span>
+
+<span class="n">all_findings</span> <span class="o">=</span> <span class="nf">remove_dup</span><span class="p">(</span><span class="n">gitleaks_findings</span> <span class="o">+</span> <span class="n">ai_findings</span><span class="p">)</span>
+</code></pre></div></div> <p>Gitleaks is run by default, and we haven’t provided (nor intend to) any options to turn off Gitleaks scan yet. The reason we have to have an <code class="language-plaintext highlighter-rouge">ai_review_ok</code> variable is to know whether the AI scan was run successfully or not, as it will return <code class="language-plaintext highlighter-rouge">[]</code> in <code class="language-plaintext highlighter-rouge">ai_findings</code> both when no findings are found and when there is an error during the scanning process.</p> <p>The findings are then passed into the <code class="language-plaintext highlighter-rouge">removed_dup</code> function implemented in the <code class="language-plaintext highlighter-rouge">report_generator</code> module. We will then print the appropriate message to the terminal based on the findings.</p> <p>When there are no findings:</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="ow">not</span> <span class="n">all_findings</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">ai_enabled</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">[yellow]AI review disabled by config.[/yellow]</span><span class="sh">"</span><span class="p">)</span>
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">[green]No security findings found![/green]</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">[green]CommitGate scan completed![/green]</span><span class="sh">"</span><span class="p">)</span>
+    <span class="k">raise</span> <span class="n">typer</span><span class="p">.</span><span class="nc">Exit</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</code></pre></div></div> <p>When there are findings:</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">decision</span> <span class="o">=</span> <span class="nf">decide</span><span class="p">(</span><span class="n">all_findings</span><span class="p">)</span>
+<span class="nf">log_decision</span><span class="p">(</span><span class="n">decision</span><span class="p">)</span>
+<span class="n">action</span> <span class="o">=</span> <span class="n">decision</span><span class="p">[</span><span class="sh">"</span><span class="s">action</span><span class="sh">"</span><span class="p">]</span>
+
+<span class="n">color</span> <span class="o">=</span> <span class="sh">"</span><span class="s">yellow</span><span class="sh">"</span> <span class="k">if</span> <span class="n">action</span> <span class="o">==</span> <span class="sh">"</span><span class="s">warn</span><span class="sh">"</span> <span class="k">else</span> <span class="sh">"</span><span class="s">red</span><span class="sh">"</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">[</span><span class="si">{</span><span class="n">color</span><span class="si">}</span><span class="s">]CommitGate detected </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">all_findings</span><span class="p">)</span><span class="si">}</span><span class="s"> security finding(s):[/</span><span class="si">{</span><span class="n">color</span><span class="si">}</span><span class="s">]</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">finding</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">all_findings</span><span class="p">):</span>
+    <span class="n">severity</span> <span class="o">=</span> <span class="n">finding</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">"</span><span class="s">severity</span><span class="sh">"</span><span class="p">,</span> <span class="sh">""</span><span class="p">).</span><span class="nf">lower</span><span class="p">()</span>
+    <span class="n">sev_color</span> <span class="o">=</span> <span class="nf">severity_color</span><span class="p">(</span><span class="n">severity</span><span class="o">=</span><span class="n">severity</span><span class="p">)</span>
+
+    <span class="nf">print</span><span class="p">(</span>
+        <span class="sa">f</span><span class="sh">"</span><span class="s">[</span><span class="si">{</span><span class="n">sev_color</span><span class="si">}</span><span class="s">]</span><span class="sh">"</span>
+        <span class="sa">f</span><span class="sh">"</span><span class="s">[</span><span class="si">{</span><span class="n">severity</span><span class="p">.</span><span class="nf">upper</span><span class="p">()</span><span class="si">}</span><span class="s">] Finding #</span><span class="si">{</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="si">}</span><span class="sh">"</span>
+        <span class="sa">f</span><span class="sh">"</span><span class="s">[/</span><span class="si">{</span><span class="n">sev_color</span><span class="si">}</span><span class="s">]</span><span class="sh">"</span>
+    <span class="p">)</span>
+
+    <span class="n">finding_output</span> <span class="o">=</span> <span class="nf">format_finding</span><span class="p">(</span><span class="n">finding</span><span class="o">=</span><span class="n">finding</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="n">fields</span><span class="p">)</span>
+
+    <span class="nf">print</span><span class="p">(</span><span class="n">finding_output</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">()</span>
+</code></pre></div></div> <p>We also added an <code class="language-plaintext highlighter-rouge">init</code> command that installs the git hook and creates the config file:</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@app.command</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">init</span><span class="p">():</span>
+    <span class="n">config_file</span> <span class="o">=</span> <span class="nf">create_default_config</span><span class="p">()</span>
+    <span class="n">hook_path</span> <span class="o">=</span> <span class="nf">install_git_hook</span><span class="p">()</span>
+
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">[green]Created config file:[/green] </span><span class="si">{</span><span class="n">config_file</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">[green]Installed </span><span class="si">{</span><span class="n">hook_path</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s"> hook:[/green] </span><span class="si">{</span><span class="n">hook_path</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div> <p><br></p> <h2 id="2-config-system">2. Config System</h2> <hr> <p>We implemented a config system that allows users to configure CommitGate. The configurations are stored in a <code class="language-plaintext highlighter-rouge">commitgate.yaml</code> file so that users within a project can share the same configurations (or they can simply add it to <code class="language-plaintext highlighter-rouge">.gitignore</code>).</p> <p>Creating the default config file is very straightforward:</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">DEFAULT_CONFIG</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="sh">"</span><span class="s">enabled</span><span class="sh">"</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">ai</span><span class="sh">"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="sh">"</span><span class="s">enabled</span><span class="sh">"</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">provider</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">deepseek</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">timeout</span><span class="sh">"</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="sh">"</span><span class="s">policy</span><span class="sh">"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="sh">"</span><span class="s">block_severity</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">high</span><span class="sh">"</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="sh">"</span><span class="s">reporting</span><span class="sh">"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="sh">"</span><span class="s">min_severity</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">medium</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">fields</span><span class="sh">"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="sh">"</span><span class="s">source</span><span class="sh">"</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+            <span class="sh">"</span><span class="s">category</span><span class="sh">"</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+            <span class="c1"># "severity": True,
+</span>            <span class="c1"># "file": True,
+</span>            <span class="c1"># "location": True,
+</span>            <span class="sh">"</span><span class="s">description</span><span class="sh">"</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+            <span class="sh">"</span><span class="s">suggestions</span><span class="sh">"</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+
+<span class="n">DEFAULT_CONFIG_YAML</span> <span class="o">=</span> <span class="sh">"""</span><span class="se">\
+</span><span class="s"># Enable or disable CommitGate for this repository.
+enabled: true
+
+ai:
+  # Enable AI-powered security review.
+  enabled: true
+
+  # AI provider to use.
+  # Option 1: (AI_KEY in .env): openai, gemini, deepseek, kimi, groq (Tip: groq offers a free API key - at https://console.groq.com)
+  # Option 2: Claude Code or Codex (no API key): claude-cli, codex-cli
+  provider: deepseek
+
+  # Maximum time (seconds) allowed for AI review.
+  timeout: 20
+
+policy:
+  # Findings at or above this severity block the commit/push.
+  # Options: low, medium, high, critical
+  block_severity: high
+
+reporting:
+  # Minimum severity shown in CommitGate output.
+  # Must be &lt;= block_severity, so a blocking finding is never hidden
+  # Options: low, medium, high, critical
+  # Example: medium shows medium, high, and critical findings, but hides low findings.
+  # Raising this also speeds up the AI review (fewer findings to generate).
+  min_severity: medium
+
+  # Control which optional fields are displayed for each finding.
+  # Turning off description and suggestions also speeds up the AI review.
+  fields:
+    source: true
+    category: true
+    description: true
+    suggestions: true
+</span><span class="sh">"""</span>
+</code></pre></div></div> <p>We’ll use <code class="language-plaintext highlighter-rouge">DEFAULT_CONFIG</code> when we need to load the default config and <code class="language-plaintext highlighter-rouge">DEFAULT_CONFIG_YAML</code> when creating the default file. This is done so that the file comes with helpful comments to let the user know how to use the different configuration options. To create the file:</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">path</span> <span class="o">=</span> <span class="nf">get_config_path</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">path</span><span class="p">.</span><span class="nf">exists</span><span class="p">()</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">overwrite</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">path</span>
+
+<span class="n">path</span><span class="p">.</span><span class="nf">write_text</span><span class="p">(</span><span class="n">DEFAULT_CONFIG_YAML</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="sh">"</span><span class="s">utf-8</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">return</span> <span class="n">path</span>
+</code></pre></div></div> <p>To load user’s configurations, we merge it with the default configs and then validate them:</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">path</span> <span class="o">=</span> <span class="nf">get_config_path</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="p">.</span><span class="nf">exists</span><span class="p">():</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="nf">deepcopy</span><span class="p">(</span><span class="n">DEFAULT_CONFIG</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="sh">"</span><span class="s">r</span><span class="sh">"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="sh">"</span><span class="s">utf-8</span><span class="sh">"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">user_config</span> <span class="o">=</span> <span class="n">yaml</span><span class="p">.</span><span class="nf">safe_load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> 
+    
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">user_config</span><span class="p">:</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="nf">deepcopy</span><span class="p">(</span><span class="n">DEFAULT_CONFIG</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="ow">not</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">user_config</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="nc">ValueError</span><span class="p">(</span><span class="sh">"</span><span class="s">commitgate.yaml must contain a YAML dictionary</span><span class="sh">"</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="nf">merge_with_defaults</span><span class="p">(</span><span class="n">user_config</span><span class="p">)</span>
+
+<span class="nf">validate_config</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+<span class="k">return</span> <span class="n">config</span>
+</code></pre></div></div> <p><code class="language-plaintext highlighter-rouge">merge_with_defaults</code> uses the <code class="language-plaintext highlighter-rouge">merge_dicts</code> function to recursively merge the user configuration dict with the default one. It needs to be recursive since different configuration options might have further subdicts. <code class="language-plaintext highlighter-rouge">merge_dicts</code> is implemented like this:</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">merge_dicts</span><span class="p">(</span><span class="n">default_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">user_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">
+    Helper function: Recursive dictionary merge
+    </span><span class="sh">"""</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="nf">deepcopy</span><span class="p">(</span><span class="n">default_dict</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">user_dict</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+        <span class="c1"># if the current subfield is also a dictionary, then we call the merge function
+</span>        <span class="nf">if </span><span class="p">(</span>
+            <span class="n">key</span> <span class="ow">in</span> <span class="n">result</span>
+            <span class="ow">and</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="nb">dict</span><span class="p">)</span>
+            <span class="ow">and</span> <span class="nf">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span>
+        <span class="p">):</span>
+            <span class="n">result</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="nf">merge_dicts</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="n">value</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">result</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+    
+    <span class="k">return</span> <span class="n">result</span>
+</code></pre></div></div> <p>I will not show the validation function since it is pretty straightforward. We check the user config against a pre-defined set of valid options and raise a ValueError if it is not valid.</p> <p><br></p> <h2 id="conclusion">Conclusion</h2> <hr> <p>Unfortunately, this will be the last post talking about CommitGate’s implementation. I might write some more posts in the future discussing its updates but nothing is decided yet. In the next post (which will be the last of the whole series), I will talk about the lessons I learned creating CommitGate, and also give some final words on the project. See yall then!</p> </div> </article> <br> <hr> <br> <h2 class="text-3xl font-semibold mb-4 mt-12">Enjoy Reading This Article?</h2> <p class="mb-2">Here are some more articles you might like to read next:</p> <ul class="list-disc pl-7 my-3 space-y-2 marker:text-[var(--global-theme-color)]"> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/commitgate-part-3/">Building CommitGate - Part 3: Git Hooks Installation</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/commitgate-part-4/">Building CommitGate - Part 4: Gitleaks Integration &amp; Git Hook Install Fix</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/commitgate-part-2/">Building CommitGate - Part 2: Workflow &amp; Repository Setup</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/commigate-part-1/">Building CommitGate - Part 1: Planning &amp; Architecture</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/nba-playoff-qualification-prediction-using-logistic-regression/">NBA Playoff Qualification Prediction Using Logistic Regression</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/predicting-nba-player-salary-using-linear-regression/">Predicting NBA Player Salary Using Linear Regression</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/predict-nba-position-using-k-nearest-neighbor/">Predict NBA Position Using K-nearest Neighbor</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/predict-nba-position-using-k-means-clustering/">Predict NBA Position Using K-means Clustering</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="https://medium.com/@mikelyy/the-most-underrated-human-ability-9ce1517446fa?source=rss-fc1df62d18b9------2" target="_blank" rel="noopener noreferrer">The most underrated human ability</a> <svg width="1rem" height="1rem" viewbox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"> <path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path> </svg> </li> </ul> <div id="giscus_thread" style="max-width: 930px; margin: 0 auto;"> <br> <script>
+    (function setupGiscus() {
+      function determineGiscusTheme() {
+        var theme = localStorage.getItem("theme") || document.documentElement.getAttribute("data-theme") || "system";
+if (theme === "dark") return "preferred_dark";
+if (theme === "light") return "preferred_light";
+var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+return prefersDark ? "preferred_dark" : "preferred_light";
+
+      }
+
+      var giscusTheme = determineGiscusTheme();
+      var attrs = {
+        src: "https://giscus.app/client.js",
+        "data-repo": "ductrl/ductrl.github.io",
+        "data-repo-id": "R_kgDOS3VXzg",
+        "data-category": "Announcements",
+        "data-category-id": "DIC_kwDOS3VXzs4C_eZt",
+        "data-mapping": "pathname",
+        "data-strict": "1",
+        "data-reactions-enabled": "1",
+        "data-emit-metadata": "0",
+        "data-input-position": "top",
+        "data-theme": giscusTheme,
+        "data-lang": "en",
+        crossorigin: "anonymous",
+        async: true
+      };
+
+      var giscusScript = document.createElement("script");
+      Object.entries(attrs).forEach(function(entry) { giscusScript.setAttribute(entry[0], entry[1]); });
+      var host = document.getElementById("giscus_thread");
+      if (host) host.appendChild(giscusScript);
+    })();
+  </script> <noscript> Please enable JavaScript to view the <a href="http://giscus.app/?ref_noscript" rel="external nofollow noopener" target="_blank">comments powered by giscus.</a> </noscript> </div> </div> </div> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Mike Ly. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="external nofollow noopener">GitHub Pages</a>. Last updated: July 17, 2026. </div> </footer> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script defer src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6" crossorigin="anonymous"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script defer src="https://cdn.jsdelivr.net/npm/tocbot@4.36.4/dist/tocbot.min.js" integrity="sha256-lo/r+jQ81wWrxdIiiiEEd538z4+dTJTt+leOuAS7GCw=" crossorigin="anonymous"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script defer src="/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/al_search/js/search-setup.js"></script> <script>
+// get the ninja-keys element
+const ninja = document.querySelector('ninja-keys');
+
+// add the home and posts menu items
+ninja.data = [{
+    id: "nav-about",
+    title: "about",
+    section: "Navigation",
+    handler: () => {
+      window.location.href = "/";
+    },
+  },{id: "nav-blog",
+          title: "blog",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/blog/";
+          },
+        },{id: "nav-publications",
+          title: "publications",
+          description: "publications by categories in reversed chronological order. generated by jekyll-scholar.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/publications/";
+          },
+        },{id: "nav-projects",
+          title: "projects",
+          description: "A collection of my projects. Hopefully it will grow bigger as time goes on.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/projects/";
+          },
+        },{id: "nav-repositories",
+          title: "repositories",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/repositories/";
+          },
+        },{id: "nav-cv",
+          title: "CV",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/cv/";
+          },
+        },{id: "post-building-commitgate-part-5-cli-integration",
+        
+          title: "Building CommitGate - Part 5: CLI Integration",
+        
+        description: "Part 5 of building CommitGate - a personal project I’m working on for the Splunk Agentic Ops Hackathon",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/commitgate-part-5/";
+          
+        },
+      },{id: "post-building-commitgate-part-4-gitleaks-integration-amp-git-hook-install-fix",
+        
+          title: "Building CommitGate - Part 4: Gitleaks Integration &amp; Git Hook Install Fix",
+        
+        description: "Part 4 of building CommitGate - a personal project I’m working on for the Splunk Agentic Ops Hackathon",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/commitgate-part-4/";
+          
+        },
+      },{id: "post-building-commitgate-part-3-git-hooks-installation",
+        
+          title: "Building CommitGate - Part 3: Git Hooks Installation",
+        
+        description: "Part 3 of building CommitGate - a personal project I’m working on for the Splunk Agentic Ops Hackathon",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/commitgate-part-3/";
+          
+        },
+      },{id: "post-building-commitgate-part-2-workflow-amp-repository-setup",
+        
+          title: "Building CommitGate - Part 2: Workflow &amp; Repository Setup",
+        
+        description: "Part 2 of building CommitGate - a personal project I’m working on for the Splunk Agentic Ops Hackathon",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/commitgate-part-2/";
+          
+        },
+      },{id: "post-building-commitgate-part-1-planning-amp-architecture",
+        
+          title: "Building CommitGate - Part 1: Planning &amp; Architecture",
+        
+        description: "Part 1 of building CommitGate - a personal project I’m working on for the Splunk Agentic Ops Hackathon",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/commigate-part-1/";
+          
+        },
+      },{id: "post-nba-playoff-qualification-prediction-using-logistic-regression",
+        
+          title: "NBA Playoff Qualification Prediction Using Logistic Regression",
+        
+        description: "Predict whether an NBA team will make the playoffs or not using a logistic regression model",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/nba-playoff-qualification-prediction-using-logistic-regression/";
+          
+        },
+      },{id: "post-predict-nba-position-using-k-nearest-neighbor",
+        
+          title: "Predict NBA Position Using K-nearest Neighbor",
+        
+        description: "Predict NBA position from height and weight using a K-nearest neighbor",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/predict-nba-position-using-k-nearest-neighbor/";
+          
+        },
+      },{id: "post-predict-nba-position-using-k-means-clustering",
+        
+          title: "Predict NBA Position Using K-means Clustering",
+        
+        description: "Predict NBA position from height and weight using a K-means clustering",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/predict-nba-position-using-k-means-clustering/";
+          
+        },
+      },{id: "post-predicting-nba-player-salary-using-linear-regression",
+        
+          title: "Predicting NBA Player Salary Using Linear Regression",
+        
+        description: "Predict NBA salaries from their stats using a linear regression model",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/predicting-nba-player-salary-using-linear-regression/";
+          
+        },
+      },{id: "post-the-most-underrated-human-ability",
+        
+          title: 'The most underrated human ability <svg width="1.2rem" height="1.2rem" top=".5rem" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.open("https://medium.com/@mikelyy/the-most-underrated-human-ability-9ce1517446fa?source=rss-fc1df62d18b9------2", "_blank");
+          
+        },
+      },{id: "books-the-godfather",
+          title: 'The Godfather',
+          description: "",
+          section: "Books",handler: () => {
+              window.location.href = "/books/the_godfather/";
+            },},{id: "news-finished-my-first-year-at-uva",
+          title: 'Finished my first year at UVA!',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/2026-05-29-uva-first-year/";
+            },},{id: "news-checkout-my-new-project-commitgate",
+          title: 'Checkout my new project CommitGate!',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/2026-06-18-commitgate/";
+            },},{id: "projects-commitgate",
+          title: 'CommitGate',
+          description: "An AI-powered Git pre-commit security gate",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/commitgate/";
+            },},{id: "teachings-data-science-fundamentals",
+          title: 'Data Science Fundamentals',
+          description: "This course covers the foundational aspects of data science, including data collection, cleaning, analysis, and visualization. Students will learn practical skills for working with real-world datasets.",
+          section: "Teachings",handler: () => {
+              window.location.href = "/teachings/data-science-fundamentals/";
+            },},{id: "teachings-introduction-to-machine-learning",
+          title: 'Introduction to Machine Learning',
+          description: "This course provides an introduction to machine learning concepts, algorithms, and applications. Students will learn about supervised and unsupervised learning, model evaluation, and practical implementations.",
+          section: "Teachings",handler: () => {
+              window.location.href = "/teachings/introduction-to-machine-learning/";
+            },},{
+        id: 'social-email',
+        title: 'email',
+        section: 'Socials',
+        handler: () => {
+          window.open("mailto:%6C%79%74%72%69%64%75%63.%77%6F%72%6B@%67%6D%61%69%6C.%63%6F%6D", "_blank");
+        },
+      },{
+        id: 'social-github',
+        title: 'GitHub',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://github.com/ductrl", "_blank");
+        },
+      },{
+        id: 'social-linkedin',
+        title: 'LinkedIn',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://www.linkedin.com/in/ly-tri-duc", "_blank");
+        },
+      },{
+      id: 'light-theme',
+      title: 'Change theme to light',
+      description: 'Change the theme of the site to Light',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("light");
+      },
+    },
+    {
+      id: 'dark-theme',
+      title: 'Change theme to dark',
+      description: 'Change the theme of the site to Dark',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("dark");
+      },
+    },
+    {
+      id: 'system-theme',
+      title: 'Use system default theme',
+      description: 'Change the theme of the site to System Default',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("system");
+      },
+    },];
+
+</script> <script src="/assets/al_search/js/shortcut-key.js"></script> </body> </html>
