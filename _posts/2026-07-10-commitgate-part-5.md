@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Building CommitGate - Part 5: CLI Integration
+title: "Building CommitGate - Part 5: CLI Integration"
 date: 2026-07-10
 description: Part 5 of building CommitGate - a personal project I’m working on for the Splunk Agentic Ops Hackathon
 toc:
