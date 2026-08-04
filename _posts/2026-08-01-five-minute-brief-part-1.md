@@ -44,6 +44,8 @@ As mentioned, I want the product to produce only 3-7 headlines, and ideally an a
 
 The summaries will be one- to two-sentence long with a structure of **what happened** and **necessary context to understand it**. Under each headline summary, there should be up to 3 buttons displaying publication names, which will open up the source article for users to read on the topic. I understand that users will prefer certain news sources based on their political standpoint, but I do not intend to spend too much time on worrying about this.
 
+<br>
+
 ## 3. Tech stack
 ---
 
