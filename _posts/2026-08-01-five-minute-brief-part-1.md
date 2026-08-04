@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Building Five-Minute-Brief - Part 1: Planning
+title: "Building Five-Minute-Brief - Part 1: Planning"
 date: 2026-08-01
-description: Part 1 of building Five-Minute-Brief
+description: "Part 1 of building Five-Minute-Brief"
 toc:
     sidebar: left
 tags: five-minute-brief
