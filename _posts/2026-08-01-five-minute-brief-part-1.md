@@ -51,12 +51,12 @@ The summaries will be one- to two-sentence long with a structure of **what happe
 
 This is the tech stack I plan to use to implement this product:
 
-1) **We will use WXT as this will be a Chrome extension**. This was suggested by ChatGPT and after my own research, it is the industry-leading framework to develop web extensions. As you can tell, I am unfamiliar with the tool and will have to learn how to use this for the project.
-1) **I will use React for UI**. I have been spending the past 2 years self-studying JavaScript, and so I think it is time I use it in a personal project. I want to become more proficient in JavaScript through this project too, so you will see I use a JS-central tech stack.
-1) **Bootstrap for frontend styling**. I initially intended to use Tailwind, but like many others, I hate styling my product the most, and since this is just a minimalist app that I don’t really intend to scale up too much, I will just lazily go with Bootstrap.
-1) **For AI I will use OpenAI models since I just recently received free credits from hackathons**, which is embarrassingly a part of why I decided to get started on this project right now. 
-1) **I will also use GitHub Actions for daily scheduling for news generation**.
-1) **Maybe, just maybe, I will use GitHub Pages for static JSON hosting**.
+1) **We will use WXT as this will be a Chrome extension**. This was suggested by ChatGPT and after my own research, it is the industry-leading framework to develop web extensions. As you can tell, I am unfamiliar with the tool and will have to learn how to use this for the project.  
+1) **I will use React for UI**. I have been spending the past 2 years self-studying JavaScript, and so I think it is time I use it in a personal project. I want to become more proficient in JavaScript through this project too, so you will see I use a JS-central tech stack.  
+1) **Bootstrap for frontend styling**. I initially intended to use Tailwind, but like many others, I hate styling my product the most, and since this is just a minimalist app that I don’t really intend to scale up too much, I will just lazily go with Bootstrap.  
+1) **For AI I will use OpenAI models since I just recently received free credits from hackathons**, which is embarrassingly a part of why I decided to get started on this project right now.  
+1) **I will also use GitHub Actions for daily scheduling for news generation**.  
+1) **Maybe, just maybe, I will use GitHub Pages for static JSON hosting**.  
 
 <br>
 
