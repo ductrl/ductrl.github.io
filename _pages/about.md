@@ -29,4 +29,5 @@ I'm a Vietnamese student pursuing a Bachelor's degree in Computer Science at the
 
 In my free time, I'm also a music enthusiast and play the drums. I'm also a big fan of basketball, badminton and college football. Feel free to reach out if you'd like to chat about anything from computer science to sports or music. Go Hoos 🧡💙!
 
-Checkout **projects that I'm working on**: [CommitGate](https://ductrl.github.io/projects/commitgate/)
+Checkout **my past projects**: [CommitGate](https://ductrl.github.io/projects/commitgate/)
+Checkout **projects that I'm working on**: [Five Minute Brief](https://github.com/ductrl/five-minute-brief)
