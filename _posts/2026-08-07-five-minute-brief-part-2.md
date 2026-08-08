@@ -30,7 +30,7 @@ Like for all Chrome extensions, we first created a `manifest.json` file (in the 
 
 After doing all of that, we created a simple page in `App.jsx`:
 
-```js
+```jsx
 const App = () => {
   return (
     <div className="container p-4">

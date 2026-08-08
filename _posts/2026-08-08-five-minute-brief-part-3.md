@@ -43,7 +43,7 @@ First item of the day is to have some mock data that we can use for the popup. I
 
 The mock data looks like this:
 
-```json
+```js
 // FAKE MOCK DATA
 
 export const mockBrief = {
@@ -111,7 +111,7 @@ The first component to create is the Header component, which would be this part:
 
 This should be pretty straightforward:
 
-```js
+```jsx
 const Header = ({ date, storyCount }) => (
   <header>
     <p>The essential read</p>
@@ -149,7 +149,7 @@ Here, you will see that I decided to handle the accordion list with React rather
 
 For this part, we will need to implement 2 components: `StoryList` and `StoryItem`. `StoryItem` is the component for each piece of news, which means `StoryList` will just be a section with a bunch of `StoryItem`s. We will start with `StoryItem`:  
 
-```js
+```jsx
 import { useState } from "react";
 
 const StoryItem = ({ 
@@ -203,7 +203,7 @@ export default StoryItem;
 
 Next is `StoryList`, which should be significantly more straightforward:  
 
-```js
+```jsx
 import StoryItem from "./StoryItem";
 
 const StoryList = ({ stories }) => {
@@ -242,7 +242,7 @@ Last but not least, the footer:
 
 There’s not much to talk about for this one, it’s just three lines of words:   
 
-```js
+```jsx
 const Footer = ({ publishedAt }) => {
   return (
     <footer>
@@ -263,7 +263,7 @@ export default Footer;
 
 And now, putting them all together:
 
-```js
+```jsx
 import Header from "./components/Header";
 import StoryList from "./components/StoryList";
 import Footer from "./components/Footer";
