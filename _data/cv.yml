@@ -1,6 +1,6 @@
 cv:
   name: Mike Ly
-  label: Programmer
+  label: Full-Stack Software Engineer
   email: lytriduc.work@gmail.com
   location: Charlottesville, VA
   image: ""
@@ -28,11 +28,10 @@ cv:
         studyType: Bachelor's of Arts
         start_date: 2025
         end_date: 2029
-        score: "4.0"
-        # courses: "Theory of Relativity"
-        # highlights:
-        #   - Description 1.
-        #   - Description 2.
+        score: "4.0/4.0"
+        courses: "Data Structures and Algorithms, Discrete Mathematics, Computer Systems, Foundations of Commerce, Microeconomics"
+        highlights:
+          - Dean's List
 
       - institution: VNU-HCM High School for the Gifted
         location: HCMC, Vietnam
@@ -52,10 +51,9 @@ cv:
         end_date: 2026-05-24
         summary: Performed quality assurance testing for Lawly, a scheduling and payments platform, by designing test cases, executing end-to-end workflows, identifying defects, and collaborating with developers to improve platform reliability and user experience.
         highlights:
-          - Executed end-to-end testing for authentication, consultant onboarding, scheduling, booking, and payment workflows.
-          - Created detailed bug reports and test documentation that accelerated issue resolution and improved product quality.
-          - Validated API functionality using Postman and tested edge cases including booking conflicts, payment failures, and user permission flows.
-          - Performed cross-browser and responsive testing to ensure a consistent user experience across devices.
+          - Identified, documented, and communicated 80+ software defects across six development sprints by conducting regression, exploratory and end-to-end testing of a Next.js law school admissions support platform
+          - Validated UI against Figma designs and performed cross-browser and cross-platform testing across Chrome, Edge and Firefox on Windows, macOS, iPhone and iPad to identify layout and functional inconsistencies
+          - Used Chrome DevTools and Postman to test frontend and API endpoints by analyzing console errors, status codes, request parameters, response payloads and responsive layouts
 
     # Volunteer:
     #   - company: People's Climate March
@@ -123,7 +121,7 @@ cv:
     Interests:
       - name: Sports
         icon: fa-solid fa-basketball
-        keywords: "Basketball, (American) football, badminton, volleyball. Favorite teams: Milwaukee Bucks & UVA. Go Hoos!"
+        keywords: "Basketball, (American) football, badminton, volleyball, frisbee. Favorite teams: Milwaukee Bucks & UVA. Go Hoos!"
 
       - name: Music
         icon: fa-solid fa-music
@@ -151,9 +149,8 @@ cv:
           - Gitleaks Integration
           - AI Vulnerability Review
           - Git Hook Automation
-          - Submission for Splunk Agentic Ops Hackathon
         start_date: 2026-06-04
-        end_date: 2026-06-15
+        end_date: 2026-08-01
 
     # References:
     #   - name: Professor John Doe
