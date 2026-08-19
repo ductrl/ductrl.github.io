@@ -1,0 +1,454 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> Building Five-Minute-Brief - Part 4: Empty States &amp; JSON Schema | Mike Ly </title> <meta name="author" content="Mike Ly"> <meta name="description" content="Part 4 of building Five-Minute-Brief"> <meta name="keywords" content="software-engineering, cybersecurity, uva"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 930px;
+  }
+</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tocbot@4.36.4/dist/tocbot.css" integrity="sha256-zTN0r+0OKaIv2xqeNNIYxNk0pWJ6+IqPGc1iDgVzWF0=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%F0%9F%92%BB&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?v=f0b101217084a90093badfe99ff9a7d1"> <link rel="canonical" href="https://ductrl.github.io/blog/2026/five-minute-brief-part-4/"> <script src="/assets/js/theme.js?v=7af685e2ba20b37fef545c97b8064050"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> Mike Ly </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item active"> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">publications </a> </li> <li class="nav-item "> <a class="nav-link" href="/projects/">projects </a> </li> <li class="nav-item "> <a class="nav-link" href="/repositories/">repositories </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">CV </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="row"> <div class="col-sm-3"> <nav id="toc-sidebar" class="sticky-top toc toc-sidebar" aria-label="Table of contents" data-toc-collapse="expanded" data-toc-collapse-depth=""></nav> </div> <div class="col-sm-9"> <div class="post"> <header class="post-header"> <h1 class="post-title">Building Five-Minute-Brief - Part 4: Empty States &amp; JSON Schema</h1> <p class="post-meta"> Created on August 11, 2026 </p> <p class="post-tags"> <a href="/blog/2026"> <i class="fa-solid fa-calendar fa-sm"></i> 2026 </a>   ·   <a href="/blog/tag/five-minute-brief"> <i class="fa-solid fa-hashtag fa-sm"></i> five-minute-brief</a>   ·   <a href="/blog/category/projects"> <i class="fa-solid fa-tag fa-sm"></i> projects</a> </p> </header> <article class="post-content"> <div id="markdown-content"> <p>Welcome back my lovely people! Today will be quite some work since I have decided to cover two items within today’s blog. Let’s hop straight into it!</p> <p><br></p> <h2 id="1-added-loading-empty-and-error-states">1. Added Loading, Empty and Error States</h2> <hr> <h3 id="header">Header</h3> <p>First item of the day is to add user-friendly loading and error states so that the extension doesn’t completely crumble when the story isn’t loaded or something unexpected happens. This should be pretty straightforward.</p> <p>First changes I made was to the header. Right now, the header looks something like this:</p> <div class="row"> <div class="col-sm mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="https://i.postimg.cc/DfMf0HGn/image-480.webp 480w,https://i.postimg.cc/DfMf0HGn/image-800.webp 800w,https://i.postimg.cc/DfMf0HGn/image-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="https://i.postimg.cc/DfMf0HGn/image.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" data-zoomable="" loading="eager" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> </div> </div> <p>However, it would display the date and story count even if those data isn’t passed through. We want the first two lines to display no matter what (as it is static and never changes), and the third line to only appear when this data is available:</p> <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">Header</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">date</span><span class="p">,</span> <span class="nx">storyCount</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">(</span>
+  <span class="p">&lt;</span><span class="nt">header</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>The essential read<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Five Minute Brief<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+    <span class="si">{</span><span class="nx">date</span> <span class="o">&amp;&amp;</span> <span class="nx">storyCount</span> <span class="o">&amp;&amp;</span>
+      <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+        <span class="si">{</span><span class="nx">date</span><span class="si">}</span> 
+        <span class="p">&lt;</span><span class="nt">i</span> <span class="na">className</span><span class="p">=</span><span class="s">"bi bi-dot"</span><span class="p">&gt;&lt;/</span><span class="nt">i</span><span class="p">&gt;</span>
+        <span class="si">{</span><span class="nx">storyCount</span><span class="si">}</span> stories
+      <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="si">}</span>
+  <span class="p">&lt;/</span><span class="nt">header</span><span class="p">&gt;</span>
+<span class="p">)</span>
+</code></pre></div></div> <p><br></p> <h3 id="status-message">Status Message</h3> <p>Next up, we will create a StatusMessage component so that we can display an error message to users when something goes wrong. This is important as we don’t want to display more technical details to user than necessary. We will make further changes to this component when there are more error messages we need to warn the user:</p> <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">StatusMessage</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">status</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if </span><span class="p">(</span><span class="nx">status</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">success</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">if </span><span class="p">(</span><span class="nx">status</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">loading</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return </span><span class="p">(</span>
+      <span class="p">&lt;</span><span class="nt">section</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span>
+          <span class="na">className</span><span class="p">=</span><span class="s">"spinner-border"</span>
+          <span class="na">role</span><span class="p">=</span><span class="s">"status"</span>
+        <span class="p">/&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Loading today's brief...<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">section</span><span class="p">&gt;</span>
+    <span class="p">)</span>
+  <span class="p">}</span>
+
+  <span class="k">if </span><span class="p">(</span><span class="nx">status</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">empty</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>No brief is available yet for today. Check back later!<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+  <span class="p">}</span>
+
+  <span class="k">if </span><span class="p">(</span><span class="nx">status</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">network-error</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>We couldn’t load the brief. Please try again later.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+  <span class="p">}</span>
+
+  <span class="k">if </span><span class="p">(</span><span class="nx">status</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">invalid-data</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Today’s brief is unavailable.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>An unexpected error happened. Please try again later.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">StatusMessage</span><span class="p">;</span>
+</code></pre></div></div> <p><br></p> <h3 id="app">App</h3> <p>Finally, we incorporate these changes into the App:</p> <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">status</span><span class="p">,</span> <span class="nx">setStatus</span><span class="p">]</span> <span class="o">=</span> <span class="nf">useState</span><span class="p">(</span><span class="dl">'</span><span class="s1">success</span><span class="dl">'</span><span class="p">);</span>
+
+  <span class="k">if </span><span class="p">(</span><span class="nx">status</span> <span class="o">!==</span> <span class="dl">'</span><span class="s1">success</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return </span><span class="p">(</span>
+      <span class="p">&lt;</span><span class="nt">main</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">Header</span><span class="p">/&gt;</span>
+        <span class="p">&lt;</span><span class="nc">StatusMessage</span> <span class="na">status</span><span class="p">=</span><span class="si">{</span><span class="nx">status</span><span class="si">}</span><span class="p">/&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">main</span><span class="p">&gt;</span>
+    <span class="p">)</span>
+<span class="p">}</span>
+
+  <span class="k">return </span><span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">main</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">Header</span> 
+        <span class="na">date</span><span class="p">=</span><span class="si">{</span><span class="nx">mockBrief</span><span class="p">.</span><span class="nx">date</span><span class="si">}</span> 
+        <span class="na">storyCount</span><span class="p">=</span><span class="si">{</span><span class="nx">mockBrief</span><span class="p">.</span><span class="nx">stories</span><span class="p">.</span><span class="nx">length</span><span class="si">}</span>
+      <span class="p">/&gt;</span>
+
+      <span class="p">&lt;</span><span class="nc">StoryList</span> 
+        <span class="na">stories</span><span class="p">=</span><span class="si">{</span><span class="nx">mockBrief</span><span class="p">.</span><span class="nx">stories</span><span class="si">}</span>
+      <span class="p">/&gt;</span>
+
+      <span class="p">&lt;</span><span class="nc">Footer</span> <span class="na">publishedAt</span><span class="p">=</span><span class="si">{</span><span class="nx">mockBrief</span><span class="p">.</span><span class="nx">publishedAt</span><span class="si">}</span><span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">main</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div> <p><br></p> <h2 id="2-zod-schema-and-edition-validation">2. Zod Schema and Edition Validation</h2> <hr> <p>The heavier codes for today is here. We will define the Zod Schema for the edition, which is basically the format the edition will need to conform too. Also, to follow best practices, we will write tests to make sure that the validation works correctly.</p> <p>We will start from the smallest to the biggest schemas, with the first being the news source schema:</p> <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">SourceSchema</span> <span class="o">=</span> <span class="nx">z</span><span class="p">.</span><span class="nf">object</span><span class="p">({</span>
+  <span class="na">publisher</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="nf">string</span><span class="p">().</span><span class="nf">trim</span><span class="p">().</span><span class="nf">min</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+  <span class="na">url</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="nf">url</span><span class="p">().</span><span class="nf">startsWith</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://</span><span class="dl">'</span><span class="p">),</span>
+<span class="p">})</span>
+</code></pre></div></div> <p>This requires the publisher name to have at least one character and that the source url starts with <code class="language-plaintext highlighter-rouge">https://</code>. Next up is the story schema:</p> <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">StorySchema</span> <span class="o">=</span> <span class="nx">z</span><span class="p">.</span><span class="nf">object</span><span class="p">({</span>
+  <span class="na">id</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="nf">string</span><span class="p">().</span><span class="nf">trim</span><span class="p">().</span><span class="nf">min</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+  <span class="na">headline</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="nf">string</span><span class="p">().</span><span class="nf">trim</span><span class="p">().</span><span class="nf">min</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+  <span class="na">summary</span><span class="p">:</span> <span class="nx">z</span>
+    <span class="p">.</span><span class="nf">string</span><span class="p">()</span>
+    <span class="p">.</span><span class="nf">trim</span><span class="p">()</span>
+    <span class="p">.</span><span class="nf">min</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">refine</span><span class="p">((</span><span class="nx">summary</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nf">countWords</span><span class="p">(</span><span class="nx">summary</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="nx">MAX_SUMMARY_WORDS</span><span class="p">,</span> <span class="p">{</span>
+      <span class="na">message</span><span class="p">:</span> <span class="s2">`Summary must be </span><span class="p">${</span><span class="nx">MAX_SUMMARY_WORDS</span><span class="p">}</span><span class="s2"> words or fewer`</span>
+    <span class="p">}),</span>
+  <span class="na">sources</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="nf">array</span><span class="p">(</span><span class="nx">SourceSchema</span><span class="p">).</span><span class="nf">min</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="nf">max</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span>
+<span class="p">})</span>
+</code></pre></div></div> <p>Here, we required story id and headline to have at least 1 character. I might change my mind in the future about setting a max character/word limit for headlines, but we’ll see how AI-generated headlines look first. We also limited sources to be between 1-3. As you can see we have also made sure that summaries can only have at most <code class="language-plaintext highlighter-rouge">MAX_SUMMARY_WORDS</code> (which I set to 50) with this helper functions:</p> <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">countWords</span> <span class="o">=</span> <span class="p">(</span><span class="nx">text</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">trimmed</span> <span class="o">=</span> <span class="nx">text</span><span class="p">.</span><span class="nf">trim</span><span class="p">();</span>
+  <span class="k">return </span><span class="p">(</span><span class="nx">trimmed</span> <span class="o">===</span> <span class="dl">""</span> <span class="p">?</span> <span class="mi">0</span> <span class="p">:</span> <span class="nx">trimmed</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="sr">/</span><span class="se">\s</span><span class="sr">+/</span><span class="p">).</span><span class="nx">length</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">SourceSchema</span> <span class="o">=</span> <span class="nx">z</span><span class="p">.</span><span class="nf">object</span><span class="p">({</span>
+  <span class="na">publisher</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="nf">string</span><span class="p">().</span><span class="nf">trim</span><span class="p">().</span><span class="nf">min</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+  <span class="na">url</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="nf">url</span><span class="p">().</span><span class="nf">startsWith</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://</span><span class="dl">'</span><span class="p">),</span>
+<span class="p">})</span>
+</code></pre></div></div> <p>Last but definitely not least is the edition schema:</p> <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">EditionSchema</span> <span class="o">=</span> <span class="nx">z</span>
+  <span class="p">.</span><span class="nf">object</span><span class="p">({</span>
+    <span class="na">schemaVersion</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="nf">literal</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+
+    <span class="na">editionDate</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="nx">iso</span><span class="p">.</span><span class="nf">date</span><span class="p">(),</span>
+
+    <span class="na">coverageStart</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="nx">iso</span><span class="p">.</span><span class="nf">datetime</span><span class="p">(),</span>
+    <span class="na">coverageEnd</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="nx">iso</span><span class="p">.</span><span class="nf">datetime</span><span class="p">(),</span>
+    <span class="na">publishedAt</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="nx">iso</span><span class="p">.</span><span class="nf">datetime</span><span class="p">(),</span>
+
+    <span class="na">stories</span><span class="p">:</span> <span class="nx">z</span><span class="p">.</span><span class="nf">array</span><span class="p">(</span><span class="nx">StorySchema</span><span class="p">).</span><span class="nf">min</span><span class="p">(</span><span class="mi">3</span><span class="p">).</span><span class="nf">max</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="nf">refine</span><span class="p">(</span>
+    <span class="p">(</span><span class="nx">edition</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">ids</span> <span class="o">=</span> <span class="nx">edition</span><span class="p">.</span><span class="nx">stories</span><span class="p">.</span><span class="nf">map</span><span class="p">(</span><span class="nx">story</span> <span class="o">=&gt;</span> <span class="nx">story</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
+      <span class="k">return </span><span class="p">(</span><span class="k">new</span> <span class="nc">Set</span><span class="p">(</span><span class="nx">ids</span><span class="p">).</span><span class="nx">size</span> <span class="o">===</span> <span class="nx">edition</span><span class="p">.</span><span class="nx">stories</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+    <span class="p">},</span> 
+    <span class="p">{</span>
+      <span class="na">message</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Story IDs must be unique</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">path</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">stories</span><span class="dl">'</span><span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">)</span>
+  <span class="p">.</span><span class="nf">refine</span><span class="p">(</span>
+    <span class="p">(</span><span class="nx">edition</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nc">Date</span><span class="p">(</span><span class="nx">edition</span><span class="p">.</span><span class="nx">coverageStart</span><span class="p">)</span> <span class="o">&lt;</span> <span class="k">new</span> <span class="nc">Date</span><span class="p">(</span><span class="nx">edition</span><span class="p">.</span><span class="nx">coverageEnd</span><span class="p">),</span>
+    <span class="p">{</span>
+      <span class="na">message</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Coverage end must occur after coverage start</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">path</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">coverageEnd</span><span class="dl">'</span><span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">)</span>
+</code></pre></div></div> <p>I won’t go over too much details, but here are some of the validations we are enforcing:</p> <ul> <li>Dates and times like <code class="language-plaintext highlighter-rouge">editionDate</code> or <code class="language-plaintext highlighter-rouge">publishedAt</code> must follow <a href="https://www.iso.org/iso-8601-date-and-time-format.html" rel="external nofollow noopener" target="_blank">ISO 8601</a> </li> <li>There can only be 3-7 stories</li> <li>There are no duplicate story IDs</li> <li>Coverage start must be before coverage end</li> </ul> <p>I have also written tests to make sure these validations work correctly by letting the schema parses invalid editions. I won’t show them here since its a lot of codes that no one wants to read (who likes writing tests anyway, certainly not me), but you can checkout the tests in the <code class="language-plaintext highlighter-rouge">[edition.test.js file](https://github.com/ductrl/five-minute-brief/blob/main/tests/edition.test.js)</code>.</p> <p><br></p> <h2 id="conclusion">Conclusion</h2> <hr> <p>And that wraps it up for today! I just now realized I have not created an issue for styling the UI, which is a massive overlook on my part. For real this time, we will definitely work on styling the UI next time and have it look like a real product. See you soon!</p> </div> </article> <br> <hr> <br> <h2 class="text-3xl font-semibold mb-4 mt-12">Enjoy Reading This Article?</h2> <p class="mb-2">Here are some more articles you might like to read next:</p> <ul class="list-disc pl-7 my-3 space-y-2 marker:text-[var(--global-theme-color)]"> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/five-minute-brief-part-3/">Building Five-Minute-Brief - Part 3: Static Popup UI</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/commitgate-part-3/">Building CommitGate - Part 3: Git Hooks Installation</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/commitgate-part-2/">Building CommitGate - Part 2: Workflow &amp; Repository Setup</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/five-minute-brief-part-1/">Building Five-Minute-Brief - Part 1: Planning</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/commitgate-part-4/">Building CommitGate - Part 4: Gitleaks Integration &amp; Git Hook Install Fix</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/commitgate-part-5/">Building CommitGate - Part 5: CLI Integration</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/predicting-nba-player-salary-using-linear-regression/">Predicting NBA Player Salary Using Linear Regression</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/five-minute-brief-part-2/">Building Five-Minute-Brief - Part 2: Initialize Chrome extension project</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/nba-playoff-qualification-prediction-using-logistic-regression/">NBA Playoff Qualification Prediction Using Logistic Regression</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/predict-nba-position-using-k-nearest-neighbor/">Predict NBA Position Using K-nearest Neighbor</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/commigate-part-1/">Building CommitGate - Part 1: Planning &amp; Architecture</a> </li> </ul> <div id="giscus_thread" style="max-width: 930px; margin: 0 auto;"> <br> <script>
+    (function setupGiscus() {
+      function determineGiscusTheme() {
+        var theme = localStorage.getItem("theme") || document.documentElement.getAttribute("data-theme") || "system";
+if (theme === "dark") return "preferred_dark";
+if (theme === "light") return "preferred_light";
+var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+return prefersDark ? "preferred_dark" : "preferred_light";
+
+      }
+
+      var giscusTheme = determineGiscusTheme();
+      var attrs = {
+        src: "https://giscus.app/client.js",
+        "data-repo": "ductrl/ductrl.github.io",
+        "data-repo-id": "R_kgDOS3VXzg",
+        "data-category": "Announcements",
+        "data-category-id": "DIC_kwDOS3VXzs4C_eZt",
+        "data-mapping": "pathname",
+        "data-strict": "1",
+        "data-reactions-enabled": "1",
+        "data-emit-metadata": "0",
+        "data-input-position": "top",
+        "data-theme": giscusTheme,
+        "data-lang": "en",
+        crossorigin: "anonymous",
+        async: true
+      };
+
+      var giscusScript = document.createElement("script");
+      Object.entries(attrs).forEach(function(entry) { giscusScript.setAttribute(entry[0], entry[1]); });
+      var host = document.getElementById("giscus_thread");
+      if (host) host.appendChild(giscusScript);
+    })();
+  </script> <noscript> Please enable JavaScript to view the <a href="http://giscus.app/?ref_noscript" rel="external nofollow noopener" target="_blank">comments powered by giscus.</a> </noscript> </div> </div> </div> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Mike Ly. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="external nofollow noopener">GitHub Pages</a>. Last updated: August 19, 2026. </div> </footer> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script defer src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6" crossorigin="anonymous"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script defer src="https://cdn.jsdelivr.net/npm/tocbot@4.36.4/dist/tocbot.min.js" integrity="sha256-lo/r+jQ81wWrxdIiiiEEd538z4+dTJTt+leOuAS7GCw=" crossorigin="anonymous"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script defer src="/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/al_search/js/search-setup.js"></script> <script>
+// get the ninja-keys element
+const ninja = document.querySelector('ninja-keys');
+
+// add the home and posts menu items
+ninja.data = [{
+    id: "nav-about",
+    title: "about",
+    section: "Navigation",
+    handler: () => {
+      window.location.href = "/";
+    },
+  },{id: "nav-blog",
+          title: "blog",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/blog/";
+          },
+        },{id: "nav-publications",
+          title: "publications",
+          description: "publications by categories in reversed chronological order. generated by jekyll-scholar.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/publications/";
+          },
+        },{id: "nav-projects",
+          title: "projects",
+          description: "A collection of my projects. Hopefully it will grow bigger as time goes on.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/projects/";
+          },
+        },{id: "nav-repositories",
+          title: "repositories",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/repositories/";
+          },
+        },{id: "nav-cv",
+          title: "CV",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/cv/";
+          },
+        },{id: "post-building-five-minute-brief-part-4-empty-states-amp-json-schema",
+        
+          title: "Building Five-Minute-Brief - Part 4: Empty States &amp; JSON Schema",
+        
+        description: "Part 4 of building Five-Minute-Brief",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/five-minute-brief-part-4/";
+          
+        },
+      },{id: "post-building-five-minute-brief-part-3-static-popup-ui",
+        
+          title: "Building Five-Minute-Brief - Part 3: Static Popup UI",
+        
+        description: "Part 3 of building Five-Minute-Brief",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/five-minute-brief-part-3/";
+          
+        },
+      },{id: "post-building-five-minute-brief-part-2-initialize-chrome-extension-project",
+        
+          title: "Building Five-Minute-Brief - Part 2: Initialize Chrome extension project",
+        
+        description: "Part 2 of building Five-Minute-Brief",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/five-minute-brief-part-2/";
+          
+        },
+      },{id: "post-building-five-minute-brief-part-1-planning",
+        
+          title: "Building Five-Minute-Brief - Part 1: Planning",
+        
+        description: "Part 1 of building Five-Minute-Brief",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/five-minute-brief-part-1/";
+          
+        },
+      },{id: "post-building-commitgate-part-5-cli-integration",
+        
+          title: "Building CommitGate - Part 5: CLI Integration",
+        
+        description: "Part 5 of building CommitGate - a personal project I’m working on for the Splunk Agentic Ops Hackathon",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/commitgate-part-5/";
+          
+        },
+      },{id: "post-building-commitgate-part-4-gitleaks-integration-amp-git-hook-install-fix",
+        
+          title: "Building CommitGate - Part 4: Gitleaks Integration &amp; Git Hook Install Fix",
+        
+        description: "Part 4 of building CommitGate - a personal project I’m working on for the Splunk Agentic Ops Hackathon",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/commitgate-part-4/";
+          
+        },
+      },{id: "post-building-commitgate-part-3-git-hooks-installation",
+        
+          title: "Building CommitGate - Part 3: Git Hooks Installation",
+        
+        description: "Part 3 of building CommitGate - a personal project I’m working on for the Splunk Agentic Ops Hackathon",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/commitgate-part-3/";
+          
+        },
+      },{id: "post-building-commitgate-part-2-workflow-amp-repository-setup",
+        
+          title: "Building CommitGate - Part 2: Workflow &amp; Repository Setup",
+        
+        description: "Part 2 of building CommitGate - a personal project I’m working on for the Splunk Agentic Ops Hackathon",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/commitgate-part-2/";
+          
+        },
+      },{id: "post-building-commitgate-part-1-planning-amp-architecture",
+        
+          title: "Building CommitGate - Part 1: Planning &amp; Architecture",
+        
+        description: "Part 1 of building CommitGate - a personal project I’m working on for the Splunk Agentic Ops Hackathon",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/commigate-part-1/";
+          
+        },
+      },{id: "post-nba-playoff-qualification-prediction-using-logistic-regression",
+        
+          title: "NBA Playoff Qualification Prediction Using Logistic Regression",
+        
+        description: "Predict whether an NBA team will make the playoffs or not using a logistic regression model",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/nba-playoff-qualification-prediction-using-logistic-regression/";
+          
+        },
+      },{id: "post-predict-nba-position-using-k-nearest-neighbor",
+        
+          title: "Predict NBA Position Using K-nearest Neighbor",
+        
+        description: "Predict NBA position from height and weight using a K-nearest neighbor",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/predict-nba-position-using-k-nearest-neighbor/";
+          
+        },
+      },{id: "post-predict-nba-position-using-k-means-clustering",
+        
+          title: "Predict NBA Position Using K-means Clustering",
+        
+        description: "Predict NBA position from height and weight using a K-means clustering",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/predict-nba-position-using-k-means-clustering/";
+          
+        },
+      },{id: "post-predicting-nba-player-salary-using-linear-regression",
+        
+          title: "Predicting NBA Player Salary Using Linear Regression",
+        
+        description: "Predict NBA salaries from their stats using a linear regression model",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/predicting-nba-player-salary-using-linear-regression/";
+          
+        },
+      },{id: "post-the-most-underrated-human-ability",
+        
+          title: 'The most underrated human ability <svg width="1.2rem" height="1.2rem" top=".5rem" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.open("https://medium.com/@mikelyy/the-most-underrated-human-ability-9ce1517446fa?source=rss-fc1df62d18b9------2", "_blank");
+          
+        },
+      },{id: "books-the-godfather",
+          title: 'The Godfather',
+          description: "",
+          section: "Books",handler: () => {
+              window.location.href = "/books/the_godfather/";
+            },},{id: "news-finished-my-first-year-at-uva",
+          title: 'Finished my first year at UVA!',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/2026-05-29-uva-first-year/";
+            },},{id: "news-checkout-my-new-project-commitgate",
+          title: 'Checkout my new project CommitGate!',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/2026-06-18-commitgate/";
+            },},{id: "projects-commitgate",
+          title: 'CommitGate',
+          description: "An AI-powered Git pre-commit security gate",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/commitgate/";
+            },},{id: "teachings-data-science-fundamentals",
+          title: 'Data Science Fundamentals',
+          description: "This course covers the foundational aspects of data science, including data collection, cleaning, analysis, and visualization. Students will learn practical skills for working with real-world datasets.",
+          section: "Teachings",handler: () => {
+              window.location.href = "/teachings/data-science-fundamentals/";
+            },},{id: "teachings-introduction-to-machine-learning",
+          title: 'Introduction to Machine Learning',
+          description: "This course provides an introduction to machine learning concepts, algorithms, and applications. Students will learn about supervised and unsupervised learning, model evaluation, and practical implementations.",
+          section: "Teachings",handler: () => {
+              window.location.href = "/teachings/introduction-to-machine-learning/";
+            },},{
+        id: 'social-email',
+        title: 'email',
+        section: 'Socials',
+        handler: () => {
+          window.open("mailto:%6C%79%74%72%69%64%75%63.%77%6F%72%6B@%67%6D%61%69%6C.%63%6F%6D", "_blank");
+        },
+      },{
+        id: 'social-github',
+        title: 'GitHub',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://github.com/ductrl", "_blank");
+        },
+      },{
+        id: 'social-linkedin',
+        title: 'LinkedIn',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://www.linkedin.com/in/ly-tri-duc", "_blank");
+        },
+      },{
+      id: 'light-theme',
+      title: 'Change theme to light',
+      description: 'Change the theme of the site to Light',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("light");
+      },
+    },
+    {
+      id: 'dark-theme',
+      title: 'Change theme to dark',
+      description: 'Change the theme of the site to Dark',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("dark");
+      },
+    },
+    {
+      id: 'system-theme',
+      title: 'Use system default theme',
+      description: 'Change the theme of the site to System Default',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("system");
+      },
+    },];
+
+</script> <script src="/assets/al_search/js/shortcut-key.js"></script> </body> </html>
