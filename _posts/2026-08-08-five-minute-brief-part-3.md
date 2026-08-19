@@ -25,14 +25,6 @@ Sorry, I lied. As much as I wanted to jump straight into coding, we need an actu
     </div>
 </div>  
 
-I also hopped on [Color hunt](https://colorhunt.co/) to find a nice color palette just in case I want to play around more with the UI and decided on this one:
-
-<div class="row">
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="https://i.postimg.cc/J4FBqC9w/image.png" class="img-fluid rounded z-depth-1" zoomable=true %}
-    </div>
-</div>
-
 Now, we can hop into the coding part!
 
 <br>
